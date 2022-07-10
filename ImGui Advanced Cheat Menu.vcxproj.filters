@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\gui">
+      <UniqueIdentifier>{505a2a65-bad8-4a33-ba4d-282f219b1562}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\imgui">
+      <UniqueIdentifier>{f4322c8a-785b-477c-9e0f-625ebe621477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\util">
+      <UniqueIdentifier>{fc0f05ea-61fd-42fa-b6ff-46e0b1cbb7a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\menu">
+      <UniqueIdentifier>{08afddd9-5197-42ef-8b35-490382aaf03f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dependencies">
+      <UniqueIdentifier>{66826d00-b13e-40f8-a89c-d9600478a5b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dependencies\imgui-sfml">
+      <UniqueIdentifier>{39babd8f-8726-4549-a688-97860d7af35b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dependencies\imgui-sfml\imgui">
+      <UniqueIdentifier>{883174f9-332f-49b3-afbd-c40bddd48d0b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\imgui-sfml\include\imgui.cpp">
+      <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\imgui-sfml\include\imgui_demo.cpp">
+      <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\imgui-sfml\include\imgui_draw.cpp">
+      <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\imgui-sfml\include\imgui_tables.cpp">
+      <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\imgui-sfml\include\imgui_widgets.cpp">
+      <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\imgui-sfml\include\imgui-SFML.cpp">
+      <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="menu\InputUtil.cpp">
+      <Filter>Header Files\gui\util</Filter>
+    </ClCompile>
+    <ClCompile Include="menu\imgui_custom.cpp">
+      <Filter>Header Files\gui\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="menu\Menu.cpp">
+      <Filter>Header Files\gui\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="menu\Console.cpp">
+      <Filter>Header Files\gui\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="menu\imgui_helper.cpp">
+      <Filter>Header Files\gui\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="MH.cpp">
+      <Filter>Header Files\gui\util</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeH.cpp">
+      <Filter>Header Files\gui\util</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Dependencies\imgui-sfml\include\imconfig.h">
+      <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\imgui-sfml\include\imconfig-SFML.h">
+      <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\imgui-sfml\include\imgui.h">
+      <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\imgui-sfml\include\imgui_internal.h">
+      <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\imgui-sfml\include\imgui-SFML.h">
+      <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\imgui-sfml\include\imgui-SFML_export.h">
+      <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\imgui-sfml\include\imstb_rectpack.h">
+      <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\imgui-sfml\include\imstb_textedit.h">
+      <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\imgui-sfml\include\imstb_truetype.h">
+      <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\InputUtil.hpp">
+      <Filter>Header Files\gui\util</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\Settings.hpp">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\imgui_custom.hpp">
+      <Filter>Header Files\gui\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\Fonts.hpp">
+      <Filter>Header Files\gui\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\Menu.hpp">
+      <Filter>Header Files\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\Console.hpp">
+      <Filter>Header Files\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\imgui_helper.hpp">
+      <Filter>Header Files\gui\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="MH.hpp">
+      <Filter>Header Files\gui\util</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeH.hpp">
+      <Filter>Header Files\gui\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.hpp">
+      <Filter>Header Files\gui\util</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
