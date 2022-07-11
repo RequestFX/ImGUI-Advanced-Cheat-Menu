@@ -11,7 +11,7 @@
 
 ## Features
 * Decent Menu to work with
-* Custom Hotkey Button (broken rn)
+* Custom Hotkey Button
 * Console Window for Debugging
 * Font Loaded from Memory (Poppins and Fontawesome v.5 for Icons)
 * Overlay for Active Modules Loaded (very improvable) 
