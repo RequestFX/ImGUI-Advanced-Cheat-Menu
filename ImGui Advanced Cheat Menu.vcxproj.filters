@@ -72,10 +72,10 @@
     <ClCompile Include="menu\imgui_helper.cpp">
       <Filter>Header Files\gui\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="MH.cpp">
+    <ClCompile Include="util\MH.cpp">
       <Filter>Header Files\gui\util</Filter>
     </ClCompile>
-    <ClCompile Include="TimeH.cpp">
+    <ClCompile Include="util\TimeH.cpp">
       <Filter>Header Files\gui\util</Filter>
     </ClCompile>
   </ItemGroup>
@@ -128,16 +128,16 @@
     <ClInclude Include="menu\imgui_helper.hpp">
       <Filter>Header Files\gui\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="MH.hpp">
+    <ClInclude Include="util\MH.hpp">
       <Filter>Header Files\gui\util</Filter>
     </ClInclude>
-    <ClInclude Include="TimeH.hpp">
+    <ClInclude Include="util\Obf.hpp">
       <Filter>Header Files\gui\util</Filter>
     </ClInclude>
-    <ClInclude Include="Singleton.hpp">
+    <ClInclude Include="util\Singleton.hpp">
       <Filter>Header Files\gui\util</Filter>
     </ClInclude>
-    <ClInclude Include="Obf.hpp">
+    <ClInclude Include="util\TimeH.hpp">
       <Filter>Header Files\gui\util</Filter>
     </ClInclude>
   </ItemGroup>

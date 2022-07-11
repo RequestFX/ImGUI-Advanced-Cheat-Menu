@@ -1,6 +1,6 @@
 #include "imgui_helper.hpp"
 #include "Menu.hpp"
-#include "../MH.hpp"
+#include "../util/MH.hpp"
 
 float ImGuiHelper::getWidth() {
 	return ImGui::GetContentRegionAvail().x;

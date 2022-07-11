@@ -1,6 +1,6 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
-#include "Obf.hpp"
+#include "util/Obf.hpp"
 
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>

@@ -152,14 +152,14 @@
     <ClCompile Include="Dependencies\imgui-sfml\include\imgui_draw.cpp" />
     <ClCompile Include="Dependencies\imgui-sfml\include\imgui_tables.cpp" />
     <ClCompile Include="Dependencies\imgui-sfml\include\imgui_widgets.cpp" />
-    <ClCompile Include="MH.cpp" />
     <ClCompile Include="menu\Console.cpp" />
     <ClCompile Include="menu\imgui_custom.cpp" />
     <ClCompile Include="menu\imgui_helper.cpp" />
     <ClCompile Include="menu\InputUtil.cpp" />
     <ClCompile Include="menu\Menu.cpp" />
     <ClCompile Include="Source.cpp" />
-    <ClCompile Include="TimeH.cpp" />
+    <ClCompile Include="util\MH.cpp" />
+    <ClCompile Include="util\TimeH.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dependencies\imgui-sfml\include\imconfig-SFML.h" />
@@ -171,7 +171,6 @@
     <ClInclude Include="Dependencies\imgui-sfml\include\imstb_rectpack.h" />
     <ClInclude Include="Dependencies\imgui-sfml\include\imstb_textedit.h" />
     <ClInclude Include="Dependencies\imgui-sfml\include\imstb_truetype.h" />
-    <ClInclude Include="MH.hpp" />
     <ClInclude Include="menu\Console.hpp" />
     <ClInclude Include="menu\Fonts.hpp" />
     <ClInclude Include="menu\imgui_custom.hpp" />
@@ -179,9 +178,10 @@
     <ClInclude Include="menu\InputUtil.hpp" />
     <ClInclude Include="menu\Menu.hpp" />
     <ClInclude Include="menu\Settings.hpp" />
-    <ClInclude Include="Obf.hpp" />
-    <ClInclude Include="Singleton.hpp" />
-    <ClInclude Include="TimeH.hpp" />
+    <ClInclude Include="util\MH.hpp" />
+    <ClInclude Include="util\Obf.hpp" />
+    <ClInclude Include="util\Singleton.hpp" />
+    <ClInclude Include="util\TimeH.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

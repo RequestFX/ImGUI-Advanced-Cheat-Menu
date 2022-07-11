@@ -1,6 +1,6 @@
 #include "Console.hpp"
-#include "../TimeH.hpp"
-#include "../Obf.hpp"
+#include "../util/TimeH.hpp"
+#include "../util/Obf.hpp"
 
 #include "imgui_custom.hpp"
 #include <SFML/Graphics.hpp>

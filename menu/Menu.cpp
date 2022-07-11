@@ -1,5 +1,5 @@
 #include "Menu.hpp"
-#include "../Obf.hpp"
+#include "../util/Obf.hpp"
 #include "Fonts.hpp"
 #include "Settings.hpp"
 #include <vector>
