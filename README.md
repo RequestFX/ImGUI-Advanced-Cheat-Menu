@@ -6,9 +6,12 @@
 
 ![menu](https://user-images.githubusercontent.com/59796488/178153554-7cf12656-7d93-4a7c-b505-10dac9b674fb.png)
 
+* Build scripts are available for x64 DEBUG and RELEASE
+* Project will only compile for Windows without modifications
+
 ## Features
 * Decent Menu to work with
-* Custom Hotkey Button (broken rn)
+* Custom Hotkey Button
 * Console Window for Debugging
 * Font Loaded from Memory (Poppins and Fontawesome v.5 for Icons)
 * Overlay for Active Modules Loaded (very improvable) 
@@ -19,6 +22,3 @@
 * Title for Panels
 * Animations?
 * Custom Items
-
-## Known Issues to Fix
-* ImGui/Hotkey Button doesnt work correctly (Due to SFML backend, TESTED dx12 which doesn't have this issue)
