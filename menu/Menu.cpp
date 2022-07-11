@@ -144,21 +144,6 @@ void Menu::renderTabs() {
 	ImGui::EndChild();
 }
 
-void renderCombo(std::string title, std::vector<std::string>items, int& index, int comboWidth) {
-	ImGui::PushItemWidth(comboWidth);
-	if (ImGui::BeginCombo(title.c_str(), items.at(index).c_str(), 0)) {
-
-		for (int n = 0; n < items.size(); n++) {
-			const bool is_selected = (index == n);
-			if (ImGui::Selectable(items.at(n).c_str(), is_selected))index = n;
-
-			if (is_selected)ImGui::SetItemDefaultFocus();// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
-		}
-		ImGui::EndCombo();
-	}
-	ImGui::PopItemWidth();
-}
-
 void Menu::renderSubTab0() {
 	std::vector<std::string> arr = { obf("AimAssist"), obf("TriggerBot"), obf("Other") };
 	ImGuiHelper::drawTabHorizontally(obf("subtab-0"), ImVec2(ImGuiHelper::getWidth(), 50), arr, selectedSubTab0);
@@ -178,12 +163,12 @@ void Menu::renderSubTab0() {
 		ImGui::SameLine();
 
 		std::vector<std::string>items = { obf("Toggle"), obf("Hold") };
-		renderCombo(" ", items, aimAssistOnHold, 80);
+		ImGuiHelper::renderCombo(" ", items, aimAssistOnHold, 80);
 
 		ImGui::Hotkey(obf("Hotkey").c_str(), aimAssistKey);
 
 		std::vector<std::string>items1 = { obf("By Distance"), obf("By Health") };
-		renderCombo(obf("Target Selection"), items1, aimTargetSelection, elementSize);
+		ImGuiHelper::renderCombo(obf("Target Selection"), items1, aimTargetSelection, elementSize);
 		std::string targets = "";
 		if (!isAimEnemyTarget && !isAimMateTarget && !isAimBotTarget) targets = obf("None");
 		else if (isAimEnemyTarget && isAimMateTarget && isAimBotTarget) targets = obf("All");
@@ -203,7 +188,7 @@ void Menu::renderSubTab0() {
 		ImGui::PopItemWidth();
 
 		std::vector<std::string>items2 = { obf("Head"), obf("Neck"), obf("Body"), obf("Arms"), obf("Hip"), obf("Legs") };
-		renderCombo(obf("Hitbox"), items2, aimHitbox, elementSize);
+		ImGuiHelper::renderCombo(obf("Hitbox"), items2, aimHitbox, elementSize);
 
 		ImGui::PushItemWidth(elementSize);
 		ImGui::SliderInt_2(obf("Reaction ms").c_str(), &reactionms, 0, 1000);
@@ -270,7 +255,7 @@ void Menu::renderSubTab1() {
 		ImGui::Hotkey(obf("Hotkey").c_str(), espKey);
 
 		std::vector<std::string>items1 = { obf("Enemy"),obf("Mate"), obf("Bot") };
-		renderCombo(obf("Type"), items1, espType, elementSize);
+		ImGuiHelper::renderCombo(obf("Type"), items1, espType, elementSize);
 		ImGui::ColorEdit4(obf("ESP Color##1").c_str(), (float*)&espCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
 
 		std::string style = obf("Style");
@@ -335,10 +320,10 @@ void Menu::renderSubTab2() {
 		ImGui::Checkbox_(obf("Show Module List").c_str(), &isModuleList);
 		ImGui::ColorEdit4(obf("Background Color##1").c_str(), (float*)&moduleListBg, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
 		std::vector<std::string>items1 = { obf("ASC"), obf("DSC") };
-		renderCombo(obf("Sort"), items1, moduleListSortby, elementSize);
+		ImGuiHelper::renderCombo(obf("Sort"), items1, moduleListSortby, elementSize);
 
 		std::vector<std::string>items2 = { obf("Left"), obf("Right"), obf("Middle") };
-		renderCombo(obf("Align"), items2, moduleListAlign, elementSize);
+		ImGuiHelper::renderCombo(obf("Align"), items2, moduleListAlign, elementSize);
 
 		ImGui::EndChild();
 

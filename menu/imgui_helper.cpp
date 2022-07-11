@@ -60,3 +60,18 @@ ImVec4 ImGuiHelper::rgbaToVec4(ImColor& col) {
 ImVec2 ImGuiHelper::getTextLength(std::string text) {
 	return ImGui::CalcTextSize(text.c_str());
 }
+
+void ImGuiHelper::renderCombo(std::string title, std::vector<std::string>items, int& index, int comboWidth) {
+	ImGui::PushItemWidth(comboWidth);
+	if (ImGui::BeginCombo(title.c_str(), items.at(index).c_str(), 0)) {
+
+		for (int n = 0; n < items.size(); n++) {
+			const bool is_selected = (index == n);
+			if (ImGui::Selectable(items.at(n).c_str(), is_selected))index = n;
+
+			if (is_selected)ImGui::SetItemDefaultFocus();// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+		}
+		ImGui::EndCombo();
+	}
+	ImGui::PopItemWidth();
+}
