@@ -34,6 +34,9 @@
     <Filter Include="Header Files\dependencies\imgui-sfml\imgui">
       <UniqueIdentifier>{883174f9-332f-49b3-afbd-c40bddd48d0b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\util">
+      <UniqueIdentifier>{8fe30559-0d52-4df6-89c0-9f65bf82da5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -72,11 +75,11 @@
     <ClCompile Include="menu\imgui_helper.cpp">
       <Filter>Header Files\gui\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="util\MH.cpp">
-      <Filter>Header Files\gui\util</Filter>
-    </ClCompile>
     <ClCompile Include="util\TimeH.cpp">
-      <Filter>Header Files\gui\util</Filter>
+      <Filter>Header Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="util\MH.cpp">
+      <Filter>Header Files\util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,17 +131,17 @@
     <ClInclude Include="menu\imgui_helper.hpp">
       <Filter>Header Files\gui\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="util\MH.hpp">
-      <Filter>Header Files\gui\util</Filter>
-    </ClInclude>
-    <ClInclude Include="util\Obf.hpp">
-      <Filter>Header Files\gui\util</Filter>
+    <ClInclude Include="util\TimeH.hpp">
+      <Filter>Header Files\util</Filter>
     </ClInclude>
     <ClInclude Include="util\Singleton.hpp">
-      <Filter>Header Files\gui\util</Filter>
+      <Filter>Header Files\util</Filter>
     </ClInclude>
-    <ClInclude Include="util\TimeH.hpp">
-      <Filter>Header Files\gui\util</Filter>
+    <ClInclude Include="util\Obf.hpp">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\MH.hpp">
+      <Filter>Header Files\util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
