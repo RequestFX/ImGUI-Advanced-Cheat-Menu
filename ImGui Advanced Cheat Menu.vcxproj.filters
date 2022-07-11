@@ -137,5 +137,8 @@
     <ClInclude Include="Singleton.hpp">
       <Filter>Header Files\gui\util</Filter>
     </ClInclude>
+    <ClInclude Include="Obf.hpp">
+      <Filter>Header Files\gui\util</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

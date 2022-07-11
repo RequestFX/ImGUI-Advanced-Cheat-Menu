@@ -113,13 +113,11 @@ bool ImGui::Hotkey(const char* label, int& key, float samelineOffset, const ImVe
 	Button(key == 0 ? "..." : InputUtil::vkToString(key).c_str(), size);
 	if (IsItemHovered()) {
 		for (auto i = VK_MBUTTON; i <= VK_PACKET; i++) {
-			if (io.KeysDown[i]) {
+			//if (io.KeysDown[i]) {
+			if (i == VK_ESCAPE) continue;
+			if (GetAsyncKeyState(i)) {
 				key = i;
 			}
-		}
-
-		if (IsKeyPressedMap(ImGuiKey_Escape)) {
-			key = 0;
 		}
 	}
 

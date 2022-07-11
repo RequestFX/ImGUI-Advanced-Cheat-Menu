@@ -1,4 +1,5 @@
 #include "Menu.hpp"
+#include "../Obf.hpp"
 #include "Fonts.hpp"
 #include "Settings.hpp"
 #include <vector>
@@ -79,13 +80,9 @@ void Menu::loadTheme() {
 	setColors();
 }
 
-ImVec4 rgbaToVec4(float r, float g, float b, float a) {
-	return ImVec4(r / 255.0, g / 255.0, b / 255.0, a / 255.0);
-}
-
 void Menu::renderLogo() {
 	ImGui::BeginGroup(); { // group it so we can redirect to Website when its pressed
-		ImGui::BeginChild("Logo", ImVec2(158, 50), true);
+		ImGui::BeginChild(obf("Logo").c_str(), ImVec2(158, 50), true);
 
 		sf::Sprite sprite(*logoTx);
 		ImGui::Image(sprite);
@@ -94,13 +91,13 @@ void Menu::renderLogo() {
 		ImGui::SameLine();
 
 		ImGui::SetCursorPosY(11); // dont know how to center it sorry :>
-		ImGui::TextUnformatted("Big Paste");
+		ImGui::TextUnformatted(obf("Big Paste").c_str());
 		ImGui::PopFont();
 
 		ImGui::EndChild();
 
 		if (ImGui::IsItemClicked(1)) { // redirect to a website/discord on right click
-			::ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, NULL, SW_SHOWDEFAULT);
+			::ShellExecuteA(NULL, obf("open").c_str(), obf("https://www.youtube.com/watch?v=dQw4w9WgXcQ").c_str(), NULL, NULL, SW_SHOWDEFAULT);
 		}
 
 		ImGui::EndGroup();
@@ -111,7 +108,7 @@ void Menu::renderUser() {
 
 	int height = 80;
 	ImGui::Dummy(ImVec2(0.0f, ImGui::GetContentRegionAvail().y - height - style->ItemSpacing.y));
-	ImGui::BeginChild("User", ImVec2(158, height), true);
+	ImGui::BeginChild(obf("User").c_str(), ImVec2(158, height), true);
 
 	ImGui::EndChild();
 }
@@ -124,15 +121,15 @@ void Menu::renderPanel() {
 }
 
 void Menu::renderTabs() {
-	ImGui::BeginChild("tabs", ImVec2(158, 220), true);
+	ImGui::BeginChild(obf("tabs").c_str(), ImVec2(158, 220), true);
 
 	ImGuiTextFilter2 filter;
-	filter.Draw2(ICON_FA_SEARCH" Search", 140);
+	filter.Draw2(obf(ICON_FA_SEARCH" Search").c_str(), 140);
 	ImGui::Spacing();
 
 	ImVec4 col(0, 0, 0, 0);
 	ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 10); // round buttons
-	std::string tabNames[] = { ICON_FA_CROSSHAIRS " LegitBot", ICON_FA_EYE " Visuals", ICON_FA_COG " Misc", ICON_FA_SAVE " Configs" };
+	std::string tabNames[] = { obf(ICON_FA_CROSSHAIRS " LegitBot"), obf(ICON_FA_EYE " Visuals"), obf(ICON_FA_COG " Misc"), obf(ICON_FA_SAVE " Configs") };
 	for (int i = 0; i < sizeof(tabNames) / sizeof(tabNames[0]); i++) {
 		std::string it = tabNames[i];
 		ImGui::PushStyleVar(ImGuiStyleVar_ButtonTextAlign, ImVec2(0, 0.5));
@@ -147,13 +144,13 @@ void Menu::renderTabs() {
 	ImGui::EndChild();
 }
 
-void renderCombo(const char* title, const char* items[], int itemSize, int& index, int comboWidth) {
+void renderCombo(std::string title, std::vector<std::string>items, int& index, int comboWidth) {
 	ImGui::PushItemWidth(comboWidth);
-	if (ImGui::BeginCombo(title, items[index], 0)) {
+	if (ImGui::BeginCombo(title.c_str(), items.at(index).c_str(), 0)) {
 
-		for (int n = 0; n < itemSize; n++) {
+		for (int n = 0; n < items.size(); n++) {
 			const bool is_selected = (index == n);
-			if (ImGui::Selectable(items[n], is_selected))index = n;
+			if (ImGui::Selectable(items.at(n).c_str(), is_selected))index = n;
 
 			if (is_selected)ImGui::SetItemDefaultFocus();// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
 		}
@@ -163,12 +160,12 @@ void renderCombo(const char* title, const char* items[], int itemSize, int& inde
 }
 
 void Menu::renderSubTab0() {
-	std::vector<std::string> arr = { "AimAssist", "TriggerBot", "Other" };
-	ImGuiHelper::drawTabHorizontally("subtab-0", ImVec2(ImGuiHelper::getWidth(), 50), arr, selectedSubTab0);
+	std::vector<std::string> arr = { obf("AimAssist"), obf("TriggerBot"), obf("Other") };
+	ImGuiHelper::drawTabHorizontally(obf("subtab-0"), ImVec2(ImGuiHelper::getWidth(), 50), arr, selectedSubTab0);
 	ImGui::Spacing();
 
 	ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0, 0, 0, 0));
-	ImGui::BeginChild("modules-wrapper", ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), false);
+	ImGui::BeginChild(obf("modules-wrapper").c_str(), ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), false);
 	ImGui::PopStyleColor();
 
 	switch (selectedSubTab0) {
@@ -176,64 +173,66 @@ void Menu::renderSubTab0() {
 		ImGui::Columns(2, nullptr, false);
 		ImGui::SetColumnOffset(1, 300);
 
-		ImGui::BeginChild("aimassist", ImVec2(ImGui::GetContentRegionAvail().x, 300), true);
-		ImGui::Checkbox_("Enabled", &isAimAssistEnabled);
+		ImGui::BeginChild(obf("aimassist").c_str(), ImVec2(ImGui::GetContentRegionAvail().x, 300), true);
+		ImGui::Checkbox_(obf("Enabled").c_str(), &isAimAssistEnabled);
 		ImGui::SameLine();
 
-		const char* items[] = { "Toggle", "Hold" };
-		renderCombo(" ", items, sizeof(items) / sizeof(items[0]), aimAssistOnHold, 80);
+		std::vector<std::string>items = { obf("Toggle"), obf("Hold") };
+		renderCombo(" ", items, aimAssistOnHold, 80);
 
-		ImGui::Hotkey("Hotkey", aimAssistKey);
+		ImGui::Hotkey(obf("Hotkey").c_str(), aimAssistKey);
 
-		const char* items1[] = { "By Distance", "By Health" };
-		renderCombo("Target Selection", items1, sizeof(items1) / sizeof(items1[0]), aimTargetSelection, elementSize);
+		std::vector<std::string>items1 = { obf("By Distance"), obf("By Health") };
+		renderCombo(obf("Target Selection"), items1, aimTargetSelection, elementSize);
 		std::string targets = "";
-		if (!isAimEnemyTarget && !isAimMateTarget && !isAimBotTarget) targets = "None";
+		if (!isAimEnemyTarget && !isAimMateTarget && !isAimBotTarget) targets = obf("None");
+		else if (isAimEnemyTarget && isAimMateTarget && isAimBotTarget) targets = obf("All");
 		else {
-			if (isAimEnemyTarget) targets += " E";
-			if (isAimMateTarget) targets += " M";
-			if (isAimBotTarget) targets += " B";
+			if (isAimEnemyTarget) targets += obf("Enemy,").c_str();
+			if (isAimMateTarget) targets += obf("Mate,").c_str();
+			if (isAimBotTarget) targets += obf("Bots,").c_str();
+			if (targets.back() == ',') targets.pop_back(); // remove , at the end
 		}
 		ImGui::PushItemWidth(elementSize);
-		if (ImGui::BeginCombo("Targets", targets.c_str(), 0)) {
-			ImGui::Checkbox_("Enemy", &isAimEnemyTarget);
-			ImGui::Checkbox_("Mate", &isAimMateTarget);
-			ImGui::Checkbox_("Bot", &isAimBotTarget);
+		if (ImGui::BeginCombo(obf("Targets").c_str(), targets.c_str(), 0)) {
+			ImGui::Checkbox_(obf("Enemy").c_str(), &isAimEnemyTarget);
+			ImGui::Checkbox_(obf("Mate").c_str(), &isAimMateTarget);
+			ImGui::Checkbox_(obf("Bot").c_str(), &isAimBotTarget);
 			ImGui::EndCombo();
 		}
 		ImGui::PopItemWidth();
 
-		const char* items2[] = { "Head", "Neck", "Body", "Arms", "Hip", "Legs" };
-		renderCombo("Hitbox", items2, sizeof(items2) / sizeof(items2[0]), aimHitbox, elementSize);
+		std::vector<std::string>items2 = { obf("Head"), obf("Neck"), obf("Body"), obf("Arms"), obf("Hip"), obf("Legs") };
+		renderCombo(obf("Hitbox"), items2, aimHitbox, elementSize);
 
 		ImGui::PushItemWidth(elementSize);
-		ImGui::SliderInt_2("Reaction ms", &reactionms, 0, 1000);
+		ImGui::SliderInt_2(obf("Reaction ms").c_str(), &reactionms, 0, 1000);
 		ImGui::PopItemWidth();
 
 		ImGui::PushItemWidth(elementSize);
-		ImGui::SliderInt_2("FOV", &fov, 0, 180);
+		ImGui::SliderInt_2(obf("FOV").c_str(), &fov, 0, 180);
 		ImGui::PopItemWidth();
-		ImGui::Checkbox_("Relative FOV", &relativeFOV);
-		ImGui::Checkbox_("No Snap", &noAimSnap);
-		ImGui::Checkbox_("No Lock", &noAimLock);
+		ImGui::Checkbox_(obf("Relative FOV").c_str(), &relativeFOV);
+		ImGui::Checkbox_(obf("No Snap").c_str(), &noAimSnap);
+		ImGui::Checkbox_(obf("No Lock").c_str(), &noAimLock);
 		ImGui::EndChild();
 
 		ImGui::Spacing();
 
-		ImGui::BeginChild("aimassist2", ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), true);
-		ImGui::Checkbox_("Enable Recoil Control", &isRCS);
-		ImGui::Checkbox_("Standalone", &standaloneRCS);
+		ImGui::BeginChild(obf("aimassist2").c_str(), ImVec2(ImGuiHelper::getWidth(), ImGuiHelper::getHeight()), true);
+		ImGui::Checkbox_(obf("Enable Recoil Control").c_str(), &isRCS);
+		ImGui::Checkbox_(obf("Standalone").c_str(), &standaloneRCS);
 
 		ImGui::PushItemWidth(elementSize);
-		ImGui::SliderFloat_("X Strength", &rcsXStrength, 0.1, 1);
-		ImGui::SliderFloat_("Y Strength", &rcsYStrength, 0.1, 1);
+		ImGui::SliderFloat_(obf("X Strength").c_str(), &rcsXStrength, 0.1, 1);
+		ImGui::SliderFloat_(obf("Y Strength").c_str(), &rcsYStrength, 0.1, 1);
 		ImGui::PopItemWidth();
 
 		ImGui::EndChild();
 
 		ImGui::NextColumn();
 
-		ImGui::BeginChild("aimassist3", ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), true);
+		ImGui::BeginChild(obf("aimassist3").c_str(), ImVec2(ImGuiHelper::getWidth(), ImGuiHelper::getHeight()), true);
 		ImGui::EndChild();
 
 		break;
@@ -252,12 +251,12 @@ void Menu::renderSubTab0() {
 }
 
 void Menu::renderSubTab1() {
-	std::vector<std::string> arr = { "ESP", "World", "Other" };
-	ImGuiHelper::drawTabHorizontally("subtab-1", ImVec2(ImGuiHelper::getWidth(), 50), arr, selectedSubTab1);
+	std::vector<std::string> arr = { obf("ESP"), obf("World"), obf("Other") };
+	ImGuiHelper::drawTabHorizontally(obf("subtab-1"), ImVec2(ImGuiHelper::getWidth(), 50), arr, selectedSubTab1);
 	ImGui::Spacing();
 
 	ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0, 0, 0, 0));
-	ImGui::BeginChild("modules-wrapper", ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), false);
+	ImGui::BeginChild(obf("modules-wrapper").c_str(), ImVec2(ImGuiHelper::getWidth(), ImGuiHelper::getHeight()), false);
 	ImGui::PopStyleColor();
 
 	switch (selectedSubTab1) {
@@ -265,41 +264,41 @@ void Menu::renderSubTab1() {
 		ImGui::Columns(2, nullptr, false);
 		ImGui::SetColumnOffset(1, 300);
 
-		ImGui::BeginChild("esp", ImVec2(ImGui::GetContentRegionAvail().x, 300), true);
-		ImGui::Checkbox_("Enabled", &isESPEnabled);
+		ImGui::BeginChild(obf("esp").c_str(), ImVec2(ImGui::GetContentRegionAvail().x, 300), true);
+		ImGui::Checkbox_(obf("Enabled").c_str(), &isESPEnabled);
 
-		ImGui::Hotkey("Hotkey", espKey);
+		ImGui::Hotkey(obf("Hotkey").c_str(), espKey);
 
-		const char* items1[] = { "Enemy", "Mate", "Bot" };
-		renderCombo("Type", items1, sizeof(items1) / sizeof(items1[0]), espType, elementSize);
-		ImGui::ColorEdit4("ESP Color##1", (float*)&espCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+		std::vector<std::string>items1 = { obf("Enemy"),obf("Mate"), obf("Bot") };
+		renderCombo(obf("Type"), items1, espType, elementSize);
+		ImGui::ColorEdit4(obf("ESP Color##1").c_str(), (float*)&espCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
 
-		std::string style = "Style";
+		std::string style = obf("Style");
 		ImGui::PushItemWidth(elementSize);
-		if (ImGui::BeginCombo("Style", style.c_str(), 0)) {
-			ImGui::Checkbox_("2D Box", &espShow2D);
-			ImGui::Checkbox_("Skeleton", &espShowSkeleton);
-			ImGui::Checkbox_("Healthbar", &espShowHealth);
-			ImGui::Checkbox_("Head Circle", &espShowHeadCircle);
+		if (ImGui::BeginCombo(obf("Style").c_str(), style.c_str(), 0)) {
+			ImGui::Checkbox_(obf("2D Box").c_str(), &espShow2D);
+			ImGui::Checkbox_(obf("Skeleton").c_str(), &espShowSkeleton);
+			ImGui::Checkbox_(obf("Healthbar").c_str(), &espShowHealth);
+			ImGui::Checkbox_(obf("Head Circle").c_str(), &espShowHeadCircle);
 
 			ImGui::EndCombo();
 		}
 		ImGui::PopItemWidth();
 
-		ImGui::Checkbox_("Based on Health", &espColByHealth);
+		ImGui::Checkbox_(obf("Based on Health").c_str(), &espColByHealth);
 
 		ImGui::EndChild();
 
 		ImGui::Spacing();
 
-		ImGui::BeginChild("Markers", ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), true);
-		ImGui::Checkbox_("Enable Markers", &isESPMarkers);
-		ImGui::ColorEdit4("Marker Color##1", (float*)&markerCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+		ImGui::BeginChild(obf("Markers").c_str(), ImVec2(ImGuiHelper::getWidth(), ImGuiHelper::getHeight()), true);
+		ImGui::Checkbox_(obf("Enable Markers").c_str(), &isESPMarkers);
+		ImGui::ColorEdit4(obf("Marker Color##1").c_str(), (float*)&markerCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
 		ImGui::EndChild();
 
 		ImGui::NextColumn();
 
-		ImGui::BeginChild("esp2", ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), true);
+		ImGui::BeginChild(obf("esp2").c_str(), ImVec2(ImGuiHelper::getWidth(), ImGuiHelper::getHeight()), true);
 		ImGui::EndChild();
 
 		break;
@@ -318,13 +317,13 @@ void Menu::renderSubTab1() {
 }
 
 void Menu::renderSubTab2() {
-	std::vector<std::string> arr = { "General", "Other" };
-	ImGuiHelper::drawTabHorizontally("subtab-2", ImVec2(ImGuiHelper::getWidth(), 50), arr, selectedSubTab2);
+	std::vector<std::string> arr = { obf("General"), obf("Other") };
+	ImGuiHelper::drawTabHorizontally(obf("subtab-2"), ImVec2(ImGuiHelper::getWidth(), 50), arr, selectedSubTab2);
 
 	ImGui::Spacing();
 
 	ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0, 0, 0, 0));
-	ImGui::BeginChild("modules-wrapper", ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), false);
+	ImGui::BeginChild(obf("modules-wrapper").c_str(), ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), false);
 	ImGui::PopStyleColor();
 
 	switch (selectedSubTab2) {
@@ -332,25 +331,25 @@ void Menu::renderSubTab2() {
 		ImGui::Columns(2, nullptr, false);
 		ImGui::SetColumnOffset(1, 300);
 
-		ImGui::BeginChild("misc##0-0", ImVec2(ImGui::GetContentRegionAvail().x, 300), true);
-		ImGui::Checkbox_("Show Module List", &isModuleList);
-		ImGui::ColorEdit4("Background Color##1", (float*)&moduleListBg, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
-		const char* items1[] = { "ASC", "DSC" };
-		renderCombo("Sort", items1, sizeof(items1) / sizeof(items1[0]), moduleListSortby, elementSize);
+		ImGui::BeginChild(obf("misc##0-0").c_str(), ImVec2(ImGui::GetContentRegionAvail().x, 300), true);
+		ImGui::Checkbox_(obf("Show Module List").c_str(), &isModuleList);
+		ImGui::ColorEdit4(obf("Background Color##1").c_str(), (float*)&moduleListBg, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+		std::vector<std::string>items1 = { obf("ASC"), obf("DSC") };
+		renderCombo(obf("Sort"), items1, moduleListSortby, elementSize);
 
-		const char* items2[] = { "Left", "Right", "Middle" };
-		renderCombo("Align", items2, sizeof(items2) / sizeof(items2[0]), moduleListAlign, elementSize);
+		std::vector<std::string>items2 = { obf("Left"), obf("Right"), obf("Middle") };
+		renderCombo(obf("Align"), items2, moduleListAlign, elementSize);
 
 		ImGui::EndChild();
 
 		ImGui::Spacing();
 
-		ImGui::BeginChild("misc##0-1", ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), true);
+		ImGui::BeginChild(obf("misc##0-1").c_str(), ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), true);
 		ImGui::EndChild();
 
 		ImGui::NextColumn();
 
-		ImGui::BeginChild("misc##0-2", ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), true);
+		ImGui::BeginChild(obf("misc##0-2").c_str(), ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), true);
 		ImGui::EndChild();
 		break;
 	}
@@ -358,15 +357,15 @@ void Menu::renderSubTab2() {
 		ImGui::Columns(2, nullptr, false);
 		ImGui::SetColumnOffset(1, 300);
 
-		ImGui::BeginChild("gui", ImVec2(ImGui::GetContentRegionAvail().x, 300), true);
-		ImGui::ColorEdit4("Window Color##1", (float*)&winCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
-		ImGui::ColorEdit4("BackGround Color##1", (float*)&childCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
-		ImGui::ColorEdit4("Frame Color##1", (float*)&frameCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
-		ImGui::ColorEdit4("Button Color##1", (float*)&bgCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
-		ImGui::ColorEdit4("Button Hovered Color##1", (float*)&btnHoverCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
-		ImGui::ColorEdit4("Button Active Color##1", (float*)&btnActiveCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
-		ImGui::ColorEdit4("Item Color##1", (float*)&itemCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
-		ImGui::ColorEdit4("Item Active Color##1", (float*)&itemActiveCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+		ImGui::BeginChild(obf("gui").c_str(), ImVec2(ImGui::GetContentRegionAvail().x, 300), true);
+		ImGui::ColorEdit4(obf("Window Color##1").c_str(), (float*)&winCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+		ImGui::ColorEdit4(obf("BackGround Color##1").c_str(), (float*)&childCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+		ImGui::ColorEdit4(obf("Frame Color##1").c_str(), (float*)&frameCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+		ImGui::ColorEdit4(obf("Button Color##1").c_str(), (float*)&bgCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+		ImGui::ColorEdit4(obf("Button Hovered Color##1").c_str(), (float*)&btnHoverCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+		ImGui::ColorEdit4(obf("Button Active Color##1").c_str(), (float*)&btnActiveCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+		ImGui::ColorEdit4(obf("Item Color##1").c_str(), (float*)&itemCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+		ImGui::ColorEdit4(obf("Item Active Color##1").c_str(), (float*)&itemActiveCol, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
 
 		setColors(); // not optimal to call all at once but this should be no problem to handle
 
@@ -374,12 +373,12 @@ void Menu::renderSubTab2() {
 
 		ImGui::Spacing();
 
-		ImGui::BeginChild("smth", ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), true);
+		ImGui::BeginChild(obf("smth").c_str(), ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), true);
 		ImGui::EndChild();
 
 		ImGui::NextColumn();
 
-		ImGui::BeginChild("whoknows", ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), true);
+		ImGui::BeginChild(obf("whoknows").c_str(), ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), true);
 		ImGui::EndChild();
 		break;
 	}
@@ -389,7 +388,7 @@ void Menu::renderSubTab2() {
 }
 
 void Menu::renderSubTab3() {
-	ImGui::BeginChild("config-tab", ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), false);
+	ImGui::BeginChild(obf("config-tab").c_str(), ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y), false);
 
 	ImGui::EndChild();
 }
@@ -397,8 +396,9 @@ void Menu::renderSubTab3() {
 void Menu::render() {
 	renderModules();
 
-	if (GetAsyncKeyState(VK_INSERT) & 1) { 
-		isGUIVisible = !isGUIVisible; }
+	if (GetAsyncKeyState(VK_INSERT) & 1) {
+		isGUIVisible = !isGUIVisible;
+	}
 
 	if (!isGUIVisible) return;
 
@@ -447,11 +447,11 @@ void Menu::renderModules() {
 
 	{ // best if you have these in an array and sort them by length
 		if (isRCS)
-			ImGui::Text("Recoil Control");
+			ImGui::Text(obf("Recoil Control").c_str());
 		if (isAimAssistEnabled)
-			ImGui::Text("AimAssist");
+			ImGui::Text(obf("AimAssist").c_str());
 		if (isESPEnabled)
-			ImGui::Text("ESP");
+			ImGui::Text(obf("ESP").c_str());
 	}
 
 	ImGui::End();

@@ -36,7 +36,7 @@ public:
 
 	void render();
 
-	void log(const char*, bool printTime = true);
-	void logError(const char*, bool printTime = true);
-	void logInfo(const char*, bool printTime = true);
+	void log(std::string, bool printTime = true);
+	void logError(std::string, bool printTime = true);
+	void logInfo(std::string, bool printTime = true);
 };

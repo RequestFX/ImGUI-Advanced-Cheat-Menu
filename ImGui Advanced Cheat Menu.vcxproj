@@ -179,6 +179,7 @@
     <ClInclude Include="menu\InputUtil.hpp" />
     <ClInclude Include="menu\Menu.hpp" />
     <ClInclude Include="menu\Settings.hpp" />
+    <ClInclude Include="Obf.hpp" />
     <ClInclude Include="Singleton.hpp" />
     <ClInclude Include="TimeH.hpp" />
   </ItemGroup>

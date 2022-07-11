@@ -1,21 +1,20 @@
 #include "InputUtil.hpp"
 #include <Windows.h>
+#include "imgui.h"
 
 std::string InputUtil::vkToString(int vk) {
-#define caseStringify(x) case x: return std::string(#x)
+#define caseStringify(x) case x: return std::string(#x + 3)
 	char c[2] = { 0 };
 	if (vk >= '0' && vk <= '9') { c[0] = (char)vk; return std::string(c); }
 	if (vk >= 'A' && vk <= 'Z') { c[0] = (char)vk; return std::string(c); }
 	switch (vk) {
-		// VK_0 - VK_9 are the same as ASCII '0' - '9' (0x30 - 0x39)
-		// 0x40 : unassigned
-		// VK_A - VK_Z are the same as ASCII 'A' - 'Z' (0x41 - 0x5A)
-		caseStringify(VK_LBUTTON);
-		caseStringify(VK_RBUTTON);
+	case VK_LBUTTON: return "LMB";
+	case VK_RBUTTON: return "RMB";
 		caseStringify(VK_CANCEL);
-		caseStringify(VK_MBUTTON);  // NOT contiguous with L & RBUTTON
-		caseStringify(VK_XBUTTON1); // NOT contiguous with L & RBUTTON
-		caseStringify(VK_XBUTTON2); // NOT contiguous with L & RBUTTON
+	case VK_MBUTTON: return "MMB";
+	case VK_XBUTTON1: return "MB1";
+	case VK_XBUTTON2: return "MB2";
+
 		caseStringify(VK_BACK);
 		caseStringify(VK_TAB);
 		caseStringify(VK_CLEAR);
@@ -64,12 +63,12 @@ std::string InputUtil::vkToString(int vk) {
 		caseStringify(VK_NUMPAD7);
 		caseStringify(VK_NUMPAD8);
 		caseStringify(VK_NUMPAD9);
-		caseStringify(VK_MULTIPLY);
+	case VK_MULTIPLY: return "*";
 		caseStringify(VK_ADD);
 		caseStringify(VK_SEPARATOR);
 		caseStringify(VK_SUBTRACT);
 		caseStringify(VK_DECIMAL);
-		caseStringify(VK_DIVIDE);
+	case VK_DIVIDE: return "/";
 		caseStringify(VK_F1);
 		caseStringify(VK_F2);
 		caseStringify(VK_F3);
@@ -105,8 +104,8 @@ std::string InputUtil::vkToString(int vk) {
 		caseStringify(VK_RSHIFT);
 		caseStringify(VK_LCONTROL);
 		caseStringify(VK_RCONTROL);
-		caseStringify(VK_LMENU);
-		caseStringify(VK_RMENU);
+	case VK_LMENU: return "LALT";
+	case VK_RMENU: return "RALT";
 		caseStringify(VK_BROWSER_BACK);
 		caseStringify(VK_BROWSER_FORWARD);
 		caseStringify(VK_BROWSER_REFRESH);
@@ -126,25 +125,27 @@ std::string InputUtil::vkToString(int vk) {
 		caseStringify(VK_LAUNCH_APP1);
 		caseStringify(VK_LAUNCH_APP2);
 		caseStringify(VK_OEM_1);      // ';:' for US
-		caseStringify(VK_OEM_PLUS);   // '+' any country
-		caseStringify(VK_OEM_COMMA);  // ',' any country
-		caseStringify(VK_OEM_MINUS);  // '-' any country
-		caseStringify(VK_OEM_PERIOD); // '.' any country
-		caseStringify(VK_OEM_2);  // '/?' for US
+	case VK_OEM_PLUS: return "+";
+	case VK_OEM_COMMA: return ",";
+	case VK_OEM_MINUS: return "-";
+	case VK_OEM_PERIOD: return ".";
+	case VK_OEM_2: return "#";
 		caseStringify(VK_OEM_3);  // '`~' for US
 		caseStringify(VK_OEM_4);  //  '[{' for US
-		caseStringify(VK_OEM_5);  //  '\|' for US
+	case VK_OEM_5: return "^";
 		caseStringify(VK_OEM_6);  //  ']}' for US
 		caseStringify(VK_OEM_7);  //  ''"' for US
 		caseStringify(VK_OEM_8);
 		caseStringify(VK_OEM_AX);   //  'AX' key on Japanese AX kbd
-		caseStringify(VK_OEM_102);  //  "<>" or "\|" on RT 102-key kbd.
+	case VK_OEM_102: return "<";
 		caseStringify(VK_ICO_HELP); //  Help key on ICO
 		caseStringify(VK_ICO_00);   //  00 key on ICO
 		caseStringify(VK_PROCESSKEY);
 		caseStringify(VK_ICO_CLEAR);
 		caseStringify(VK_PACKET);
 	}
+
+	// should not happen
 	c[0] = (char)vk;
 	return std::string(c);
 }
