@@ -22,3 +22,11 @@
 * Title for Panels
 * Animations?
 * Custom Items
+
+## Version 1.1
+* Made ModuleList (HUD) customizeable
+* ModuleList Sorting by ASC not working currently
+
+
+https://user-images.githubusercontent.com/59796488/178722805-4d2eeae8-c656-48f8-b9b1-171c549f7fab.mp4
+
