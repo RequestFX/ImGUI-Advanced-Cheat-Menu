@@ -1,13 +1,12 @@
-#include <Windows.h>
-
+#include "../util/StringUtil.hpp"
+#include "../util/ColorH.hpp"
 #include "imgui.h"
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui_internal.h"
-
 #include "imgui_custom.hpp"
-#include <string>
-#include "InputUtil.hpp"
 
+#include <Windows.h>
+#include <string>
 
 
 
@@ -110,7 +109,7 @@ bool ImGui::Hotkey(const char* label, int& key, float samelineOffset, const ImVe
 	TextUnformatted(label);
 	SameLine(samelineOffset);
 
-	Button(key == 0 ? "..." : InputUtil::vkToString(key).c_str(), size);
+	Button(key == 0 ? "..." : StringUtil::vkToString(key).c_str(), size);
 	if (IsItemHovered()) {
 		for (auto i = VK_MBUTTON; i <= VK_PACKET; i++) {
 			//if (io.KeysDown[i]) {
@@ -122,4 +121,20 @@ bool ImGui::Hotkey(const char* label, int& key, float samelineOffset, const ImVe
 	}
 
 	return true;
+}
+
+void ImGui::chromaText(std::string text, float sat, float value, float alpha, float offset, float speed, float range) {
+	for (int i = 0; i < text.length(); i++) {
+		char c = text.c_str()[i];
+		std::string s(1, text.at(i));
+		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(-0.5, 4)); // not the best way but decent
+		float r, g, b;
+		ColorH::HSVtoRGB(ColorH::getTimeHue(i * range, speed, offset), sat, value, r, g, b);
+		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(r, g, b, alpha));
+		Text(s.c_str());
+		ImGui::PopStyleColor();
+
+		if (i != text.length() - 1) ImGui::SameLine();
+		ImGui::PopStyleVar();
+	}
 }

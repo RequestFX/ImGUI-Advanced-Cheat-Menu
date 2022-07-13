@@ -2,7 +2,8 @@
 
 #include <string>
 
-namespace InputUtil {
+namespace StringUtil {
 
 	std::string vkToString(int vk);
+	std::string boolToStr(bool flag);
 }

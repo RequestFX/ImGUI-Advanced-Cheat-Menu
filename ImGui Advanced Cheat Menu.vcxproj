@@ -146,22 +146,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AimAssist.cpp" />
     <ClCompile Include="Dependencies\imgui-sfml\include\imgui-SFML.cpp" />
     <ClCompile Include="Dependencies\imgui-sfml\include\imgui.cpp" />
     <ClCompile Include="Dependencies\imgui-sfml\include\imgui_demo.cpp" />
     <ClCompile Include="Dependencies\imgui-sfml\include\imgui_draw.cpp" />
     <ClCompile Include="Dependencies\imgui-sfml\include\imgui_tables.cpp" />
     <ClCompile Include="Dependencies\imgui-sfml\include\imgui_widgets.cpp" />
+    <ClCompile Include="ESP.cpp" />
+    <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="Marker.cpp" />
     <ClCompile Include="menu\Console.cpp" />
     <ClCompile Include="menu\imgui_custom.cpp" />
     <ClCompile Include="menu\imgui_helper.cpp" />
-    <ClCompile Include="menu\InputUtil.cpp" />
     <ClCompile Include="menu\Menu.cpp" />
+    <ClCompile Include="ModuleManager.cpp" />
+    <ClCompile Include="RCS.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="util\ColorH.cpp" />
     <ClCompile Include="util\MH.cpp" />
+    <ClCompile Include="util\StringUtil.cpp" />
     <ClCompile Include="util\TimeH.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AimAssist.hpp" />
     <ClInclude Include="Dependencies\imgui-sfml\include\imconfig-SFML.h" />
     <ClInclude Include="Dependencies\imgui-sfml\include\imconfig.h" />
     <ClInclude Include="Dependencies\imgui-sfml\include\imgui-SFML.h" />
@@ -171,16 +179,23 @@
     <ClInclude Include="Dependencies\imgui-sfml\include\imstb_rectpack.h" />
     <ClInclude Include="Dependencies\imgui-sfml\include\imstb_textedit.h" />
     <ClInclude Include="Dependencies\imgui-sfml\include\imstb_truetype.h" />
+    <ClInclude Include="ESP.hpp" />
+    <ClInclude Include="HUD.hpp" />
+    <ClInclude Include="Marker.hpp" />
     <ClInclude Include="menu\Console.hpp" />
     <ClInclude Include="menu\Fonts.hpp" />
     <ClInclude Include="menu\imgui_custom.hpp" />
     <ClInclude Include="menu\imgui_helper.hpp" />
-    <ClInclude Include="menu\InputUtil.hpp" />
     <ClInclude Include="menu\Menu.hpp" />
     <ClInclude Include="menu\Settings.hpp" />
+    <ClInclude Include="Module.hpp" />
+    <ClInclude Include="ModuleManager.hpp" />
+    <ClInclude Include="RCS.hpp" />
+    <ClInclude Include="util\ColorH.hpp" />
     <ClInclude Include="util\MH.hpp" />
     <ClInclude Include="util\Obf.hpp" />
     <ClInclude Include="util\Singleton.hpp" />
+    <ClInclude Include="util\StringUtil.hpp" />
     <ClInclude Include="util\TimeH.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

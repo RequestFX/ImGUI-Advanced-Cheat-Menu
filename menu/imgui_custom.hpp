@@ -3,6 +3,8 @@
 #include "imgui_helper.hpp"
 #include "imgui.h"
 
+#include <string>
+
 static int STYLE = 0;
 
 namespace ImGui {
@@ -16,6 +18,8 @@ namespace ImGui {
 
 	IMGUI_API bool      SliderFloat_2(const char* label, float* v, float v_min, float v_max, const char* format = "%.3f", ImGuiSliderFlags flags = 0);
 	IMGUI_API bool      SliderFloat_(const char* label, float* v, float v_min, float v_max, const char* format = "%.3f", ImGuiSliderFlags flags = 0);
+
+	IMGUI_API void     chromaText(std::string text, float sat, float value, float alpha, float speed, float offset, float range);
 }
 
 struct ImGuiTextFilter2 : public ImGuiTextFilter {

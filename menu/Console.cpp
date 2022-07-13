@@ -35,9 +35,8 @@ void Console::renderLogInfo(Output& output) {
 void Console::render() {
 	if (!DRAW_CONSOLE) return;
 
-	ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, { 300,200 });
+	ImGui::SetNextWindowSize({ 300, 200 });
 	ImGui::Begin("   ", 0, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar);
-	ImGui::PopStyleVar();
 
 	ImGuiHelper::drawTabHorizontally(obf("Styles"), ImVec2(ImGuiHelper::getWidth(), 50), types, selectedTypeTab);
 

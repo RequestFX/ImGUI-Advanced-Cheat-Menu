@@ -3,4 +3,5 @@
 
 namespace TimeH {
 	std::string getHourMinutesSeconds();
+	float currentTimeMS();
 }

@@ -42,8 +42,6 @@ namespace Menu {
 	void renderSubTab2();
 	void renderSubTab3();
 
-	void renderModules();
-
 	void render();
 
 }

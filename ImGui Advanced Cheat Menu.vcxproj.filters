@@ -19,9 +19,6 @@
     <Filter Include="Header Files\gui\imgui">
       <UniqueIdentifier>{f4322c8a-785b-477c-9e0f-625ebe621477}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\gui\util">
-      <UniqueIdentifier>{fc0f05ea-61fd-42fa-b6ff-46e0b1cbb7a5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\gui\menu">
       <UniqueIdentifier>{08afddd9-5197-42ef-8b35-490382aaf03f}</UniqueIdentifier>
     </Filter>
@@ -36,6 +33,30 @@
     </Filter>
     <Filter Include="Header Files\util">
       <UniqueIdentifier>{8fe30559-0d52-4df6-89c0-9f65bf82da5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\modules">
+      <UniqueIdentifier>{73314809-8f8f-49a6-94d3-7924235cae0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\modules\render">
+      <UniqueIdentifier>{161a9f89-bee6-4ec6-a211-635205f5425b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\modules\combat">
+      <UniqueIdentifier>{e3999531-b91f-4fff-a666-ae29345619a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\modules\combat\AimAssist">
+      <UniqueIdentifier>{874fe194-2317-45f9-b503-646904814f1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\modules\render\marker">
+      <UniqueIdentifier>{18423b5d-458e-417d-b870-e8863242b47f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\modules\render\esp">
+      <UniqueIdentifier>{5670e8cf-8d0e-4528-a8a5-b1b94a9ce128}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\modules\combat\recoilControl">
+      <UniqueIdentifier>{46655067-8a90-403f-bfd0-889978f4aab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\modules\render\hud">
+      <UniqueIdentifier>{b5f4ad6c-c999-46e6-91bb-7500fe839d47}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -60,9 +81,6 @@
     <ClCompile Include="Dependencies\imgui-sfml\include\imgui-SFML.cpp">
       <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="menu\InputUtil.cpp">
-      <Filter>Header Files\gui\util</Filter>
-    </ClCompile>
     <ClCompile Include="menu\imgui_custom.cpp">
       <Filter>Header Files\gui\imgui</Filter>
     </ClCompile>
@@ -79,6 +97,30 @@
       <Filter>Header Files\util</Filter>
     </ClCompile>
     <ClCompile Include="util\MH.cpp">
+      <Filter>Header Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="util\StringUtil.cpp">
+      <Filter>Header Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="ESP.cpp">
+      <Filter>Header Files\modules\render\esp</Filter>
+    </ClCompile>
+    <ClCompile Include="AimAssist.cpp">
+      <Filter>Header Files\modules\combat\AimAssist</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleManager.cpp">
+      <Filter>Header Files\modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Marker.cpp">
+      <Filter>Header Files\modules\render\marker</Filter>
+    </ClCompile>
+    <ClCompile Include="RCS.cpp">
+      <Filter>Header Files\modules\combat\recoilControl</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Header Files\modules\render\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="util\ColorH.cpp">
       <Filter>Header Files\util</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,9 +152,6 @@
     <ClInclude Include="Dependencies\imgui-sfml\include\imstb_truetype.h">
       <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="menu\InputUtil.hpp">
-      <Filter>Header Files\gui\util</Filter>
-    </ClInclude>
     <ClInclude Include="menu\Settings.hpp">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
@@ -141,6 +180,33 @@
       <Filter>Header Files\util</Filter>
     </ClInclude>
     <ClInclude Include="util\MH.hpp">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Module.hpp">
+      <Filter>Header Files\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="util\StringUtil.hpp">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="ESP.hpp">
+      <Filter>Header Files\modules\render\esp</Filter>
+    </ClInclude>
+    <ClInclude Include="AimAssist.hpp">
+      <Filter>Header Files\modules\combat\AimAssist</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleManager.hpp">
+      <Filter>Header Files\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Marker.hpp">
+      <Filter>Header Files\modules\render\marker</Filter>
+    </ClInclude>
+    <ClInclude Include="RCS.hpp">
+      <Filter>Header Files\modules\combat\recoilControl</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.hpp">
+      <Filter>Header Files\modules\render\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="util\ColorH.hpp">
       <Filter>Header Files\util</Filter>
     </ClInclude>
   </ItemGroup>

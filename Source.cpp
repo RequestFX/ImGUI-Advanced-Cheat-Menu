@@ -14,7 +14,7 @@
 #include "menu/Console.hpp"
 #include <Windows.h>
 
-bool show_demo_window = false;
+bool show_demo_window = true;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	sf::RenderWindow window(sf::VideoMode(1280, 800), obf("ImGui + SFML = <3"), sf::Style::Default);

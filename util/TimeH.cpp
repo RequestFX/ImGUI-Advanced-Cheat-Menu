@@ -12,3 +12,8 @@ std::string TimeH::getHourMinutesSeconds() {
 
 	return buf;
 }
+
+float TimeH::currentTimeMS() {
+	auto t = std::chrono::high_resolution_clock::now().time_since_epoch();
+	return std::chrono::duration<float>(t).count();
+}

@@ -1,8 +1,7 @@
-#include "InputUtil.hpp"
+#include "StringUtil.hpp"
 #include <Windows.h>
-#include "imgui.h"
 
-std::string InputUtil::vkToString(int vk) {
+std::string StringUtil::vkToString(int vk) {
 #define caseStringify(x) case x: return std::string(#x + 3)
 	char c[2] = { 0 };
 	if (vk >= '0' && vk <= '9') { c[0] = (char)vk; return std::string(c); }
@@ -148,4 +147,8 @@ std::string InputUtil::vkToString(int vk) {
 	// should not happen
 	c[0] = (char)vk;
 	return std::string(c);
+}
+
+std::string StringUtil::boolToStr(bool flag) {
+	return flag ? "True" : "False";
 }
