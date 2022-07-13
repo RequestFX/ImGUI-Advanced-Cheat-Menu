@@ -1,7 +1,7 @@
-#include "StringUtil.hpp"
+#include "StringH.hpp"
 #include <Windows.h>
 
-std::string StringUtil::vkToString(int vk) {
+std::string StringH::vkToString(int vk) {
 #define caseStringify(x) case x: return std::string(#x + 3)
 	char c[2] = { 0 };
 	if (vk >= '0' && vk <= '9') { c[0] = (char)vk; return std::string(c); }
@@ -142,6 +142,8 @@ std::string StringUtil::vkToString(int vk) {
 		caseStringify(VK_PROCESSKEY);
 		caseStringify(VK_ICO_CLEAR);
 		caseStringify(VK_PACKET);
+
+	case 0: return "None";
 	}
 
 	// should not happen
@@ -149,6 +151,45 @@ std::string StringUtil::vkToString(int vk) {
 	return std::string(c);
 }
 
-std::string StringUtil::boolToStr(bool flag) {
+std::string StringH::boolToStr(bool flag) {
 	return flag ? "True" : "False";
+}
+
+std::vector<std::string> StringH::split(std::string s, std::string delimiter) {
+	std::vector<std::string> splitArray;
+
+	size_t pos = 0;
+	std::string token;
+	while ((pos = s.find(delimiter)) != std::string::npos) {
+		token = s.substr(0, pos);
+		splitArray.push_back(token);
+		s.erase(0, pos + delimiter.length());
+	}
+	splitArray.push_back(s);
+
+	return splitArray;
+}
+
+bool StringH::equalsIgnoreCase(std::string a, std::string b) {
+	return std::equal(a.begin(), a.end(), b.begin(), b.end(), [](char a, char b) {
+		return tolower(a) == tolower(b);
+		});
+}
+
+std::string StringH::strToBytes(std::string s) {
+	std::string out{};
+	for (char& c : s) {
+		out += std::to_string((int)c) + " ";
+	}
+	out.pop_back();
+	return out;
+}
+
+std::string StringH::bytesToStr(std::string s) {
+	std::vector<std::string> numbers = split(s, " ");
+	std::string out{};
+	for (int i = 0; i < numbers.size(); i++) {
+		out += (char)std::stoi(numbers.at(i));
+	}
+	return out;
 }

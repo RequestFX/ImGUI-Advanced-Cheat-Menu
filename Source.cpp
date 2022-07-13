@@ -26,11 +26,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// Setup our Menu Theme and font
 	Menu::loadTheme();
 
-	Console::get().log(obf("HELLO WORLD!"));
-	Console::get().log(obf("Some Other Text"));
-	Console::get().logInfo(obf("Some Info Text :)"));
-	Console::get().logError(obf("Error Message :("));
-	Console::get().log(obf("A Log without Date"), false);
+	Console::i().log(obf("Test Log"));
+	Console::i().logInfo(obf("Info Test Log"));
+	Console::i().logError(obf("Error Test Log"));
+	Console::i().log(obf("Log with no Date"), false);
+
+	Console::i().logInfo(obf("sdcfg -> Save Current Config"));
+	Console::i().logInfo(obf("ldcfg -> Load Saved Config"));
 
 	sf::Clock deltaClock;
 	while (window.isOpen()) {
@@ -49,7 +51,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		if (show_demo_window) ImGui::ShowDemoWindow(&show_demo_window);
 
 		Menu::render();
-		Console::get().render();
+		Console::i().render();
 
 		window.clear(sf::Color(115, 140, 155, 255));
 		// sfml render here

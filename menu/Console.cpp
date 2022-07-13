@@ -1,4 +1,5 @@
 #include "Console.hpp"
+#include "../Config.hpp"
 #include "../util/TimeH.hpp"
 #include "../util/Obf.hpp"
 
@@ -35,7 +36,7 @@ void Console::renderLogInfo(Output& output) {
 void Console::render() {
 	if (!DRAW_CONSOLE) return;
 
-	ImGui::SetNextWindowSize({ 300, 200 });
+	ImGui::SetNextWindowSize({ 300, 200 }, ImGuiCond_FirstUseEver);
 	ImGui::Begin("   ", 0, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar);
 
 	ImGuiHelper::drawTabHorizontally(obf("Styles"), ImVec2(ImGuiHelper::getWidth(), 50), types, selectedTypeTab);
@@ -69,7 +70,9 @@ void Console::render() {
 	if (ImGui::InputText(obf("Input").c_str(), inputBuf, sizeof(inputBuf), input_text_flags)) {
 		std::string s = inputBuf;
 		memset(inputBuf, 0, sizeof(inputBuf));
-		if (s.compare(obf("clear").c_str()) == 0 || s.compare(obf("cls").c_str()) == 0) outputArr.clear();
+		if (s.compare(obf("clear")) == 0 || s.compare(obf("cls")) == 0) outputArr.clear();
+		else if (s.compare(obf("sdcfg")) == 0) Config::i().save();
+		else if (s.compare(obf("ldcfg")) == 0) Config::i().load();
 
 		reclaim_focus = true;
 	}

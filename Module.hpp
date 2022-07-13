@@ -1,6 +1,6 @@
 #pragma once
 #include "util/Obf.hpp"
-#include "util/StringUtil.hpp"
+#include "util/StringH.hpp"
 #include "menu/Console.hpp"
 #include <string>
 
@@ -34,10 +34,11 @@ public:
 		return key;
 	}
 
-	void setKey(int key) {
+	void setKey(int key, bool log = true) {
 		this->key = key;
-		std::string out = obf("Set Key: [").c_str() + StringUtil::vkToString(key) + obf("] for Module: [").c_str() + this->name.c_str() + "]";
-		Console::get().logInfo(out);
+		if (!log) return;
+		std::string out = obf("Set Key: [").c_str() + StringH::vkToString(key) + obf("] for Module: [").c_str() + this->name.c_str() + "]";
+		Console::i().logInfo(out);
 	}
 
 	bool& isToggled() {
@@ -46,12 +47,12 @@ public:
 
 	void setToggled(bool toggled) {
 		this->toggled = toggled;
-		Console::get().logInfo(obf("Set Toggled: [") + StringUtil::boolToStr(toggled) + obf("] for Module: [") + this->name + obf("]"));
+		Console::i().logInfo(obf("Set Toggled: [") + StringH::boolToStr(toggled) + obf("] for Module: [") + this->name + obf("]"));
 	}
 
 	void toggle() {
 		toggled = !toggled;
-		Console::get().logInfo(obf("Toggled to: [") + StringUtil::boolToStr(toggled) + obf("] for Module: [") + this->name + obf("]"));
+		Console::i().logInfo(obf("Toggled to: [") + StringH::boolToStr(toggled) + obf("] for Module: [") + this->name + obf("]"));
 
 		if (isToggled()) {
 			onEnable();

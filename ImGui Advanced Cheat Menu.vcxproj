@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AimAssist.cpp" />
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="Dependencies\imgui-sfml\include\imgui-SFML.cpp" />
     <ClCompile Include="Dependencies\imgui-sfml\include\imgui.cpp" />
     <ClCompile Include="Dependencies\imgui-sfml\include\imgui_demo.cpp" />
@@ -162,14 +163,17 @@
     <ClCompile Include="menu\Menu.cpp" />
     <ClCompile Include="ModuleManager.cpp" />
     <ClCompile Include="RCS.cpp" />
+    <ClCompile Include="Set.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="util\ColorH.cpp" />
+    <ClCompile Include="util\FileH.cpp" />
     <ClCompile Include="util\MH.cpp" />
-    <ClCompile Include="util\StringUtil.cpp" />
+    <ClCompile Include="util\StringH.cpp" />
     <ClCompile Include="util\TimeH.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AimAssist.hpp" />
+    <ClInclude Include="Config.hpp" />
     <ClInclude Include="Dependencies\imgui-sfml\include\imconfig-SFML.h" />
     <ClInclude Include="Dependencies\imgui-sfml\include\imconfig.h" />
     <ClInclude Include="Dependencies\imgui-sfml\include\imgui-SFML.h" />
@@ -191,11 +195,13 @@
     <ClInclude Include="Module.hpp" />
     <ClInclude Include="ModuleManager.hpp" />
     <ClInclude Include="RCS.hpp" />
+    <ClInclude Include="Set.hpp" />
     <ClInclude Include="util\ColorH.hpp" />
+    <ClInclude Include="util\FileH.hpp" />
     <ClInclude Include="util\MH.hpp" />
     <ClInclude Include="util\Obf.hpp" />
     <ClInclude Include="util\Singleton.hpp" />
-    <ClInclude Include="util\StringUtil.hpp" />
+    <ClInclude Include="util\StringH.hpp" />
     <ClInclude Include="util\TimeH.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

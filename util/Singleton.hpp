@@ -12,7 +12,7 @@ protected:
 	Singleton(Singleton&&) = delete;
 	Singleton& operator=(Singleton&&) = delete;
 public:
-	static T& get() { // returns instance
+	static T& i() { // returns instance
 		static T inst{};
 		return inst;
 	}

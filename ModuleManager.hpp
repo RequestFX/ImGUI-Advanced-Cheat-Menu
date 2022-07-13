@@ -10,4 +10,5 @@ public:
 	std::vector<Module*> modules; // virtual functions need pointers
 
 	ModuleManager();
+	Module* getModuleByName(std::string name);
 };

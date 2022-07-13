@@ -58,6 +58,9 @@
     <Filter Include="Header Files\modules\render\hud">
       <UniqueIdentifier>{b5f4ad6c-c999-46e6-91bb-7500fe839d47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\config">
+      <UniqueIdentifier>{2c7f4d24-5fd6-4635-a52b-745e874f3720}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -99,7 +102,7 @@
     <ClCompile Include="util\MH.cpp">
       <Filter>Header Files\util</Filter>
     </ClCompile>
-    <ClCompile Include="util\StringUtil.cpp">
+    <ClCompile Include="util\StringH.cpp">
       <Filter>Header Files\util</Filter>
     </ClCompile>
     <ClCompile Include="ESP.cpp">
@@ -121,6 +124,15 @@
       <Filter>Header Files\modules\render\hud</Filter>
     </ClCompile>
     <ClCompile Include="util\ColorH.cpp">
+      <Filter>Header Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Set.cpp">
+      <Filter>Header Files\config</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Header Files\config</Filter>
+    </ClCompile>
+    <ClCompile Include="util\FileH.cpp">
       <Filter>Header Files\util</Filter>
     </ClCompile>
   </ItemGroup>
@@ -185,7 +197,7 @@
     <ClInclude Include="Module.hpp">
       <Filter>Header Files\modules</Filter>
     </ClInclude>
-    <ClInclude Include="util\StringUtil.hpp">
+    <ClInclude Include="util\StringH.hpp">
       <Filter>Header Files\util</Filter>
     </ClInclude>
     <ClInclude Include="ESP.hpp">
@@ -207,6 +219,15 @@
       <Filter>Header Files\modules\render\hud</Filter>
     </ClInclude>
     <ClInclude Include="util\ColorH.hpp">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Set.hpp">
+      <Filter>Header Files\config</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.hpp">
+      <Filter>Header Files\config</Filter>
+    </ClInclude>
+    <ClInclude Include="util\FileH.hpp">
       <Filter>Header Files\util</Filter>
     </ClInclude>
   </ItemGroup>

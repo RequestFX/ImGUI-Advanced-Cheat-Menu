@@ -9,12 +9,12 @@
 
 HUD::HUD() : Module(obf("HUD"), obf("Renders Overlay like ModuleList")) {
 	colML_Bg = ImGuiHelper::rgbaToVec4(0, 0, 0, 100);
-	colML = ImGuiHelper::rgbaToVec4(255, 0, 0, 220);
+	colML = ImGuiHelper::rgbaToVec4(255, 100, 100, 255);
 	isMLRainbow = true;
 	sortML = 1;
 	speedML = 0.4;
-	offsetML = 0.05;
-	rangeML = 0.02;
+	offsetML = 0.06;
+	rangeML = 0.022;
 }
 
 void HUD::renderML() {
@@ -24,8 +24,8 @@ void HUD::renderML() {
 	std::vector<std::string*>modules;
 	float calcHeight = winPadding.y * 2, longestStr = 0, shortestStr;
 
-	for (int i = 0; i < ModuleManager::get().modules.size(); i++) {
-		Module* m = ModuleManager::get().modules.at(i);
+	for (int i = 0; i < ModuleManager::i().modules.size(); i++) {
+		Module* m = ModuleManager::i().modules.at(i);
 		if (!m->isToggled()) continue;
 
 		ImVec2 vec2 = ImGui::CalcTextSize(m->getName().c_str());

@@ -1,4 +1,4 @@
-#include "../util/StringUtil.hpp"
+#include "../util/StringH.hpp"
 #include "../util/ColorH.hpp"
 #include "imgui.h"
 #define IMGUI_DEFINE_MATH_OPERATORS
@@ -109,7 +109,7 @@ bool ImGui::Hotkey(const char* label, int& key, float samelineOffset, const ImVe
 	TextUnformatted(label);
 	SameLine(samelineOffset);
 
-	Button(key == 0 ? "..." : StringUtil::vkToString(key).c_str(), size);
+	Button(key == 0 ? "..." : StringH::vkToString(key).c_str(), size);
 	if (IsItemHovered()) {
 		for (auto i = VK_MBUTTON; i <= VK_PACKET; i++) {
 			//if (io.KeysDown[i]) {

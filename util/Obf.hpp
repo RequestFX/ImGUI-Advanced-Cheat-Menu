@@ -7,7 +7,16 @@
 #include <iterator>
 #include <algorithm>
 
-namespace Xor_ {
+namespace Obf {
+
+	inline std::string xor_(std::string s) {
+		std::string out{};
+		for (char& c : s) {
+			out += c ^ (s.length() + 1) ^ 'f';
+		}
+		return out;
+	}
+
 	template<std::size_t S>
 	struct Xor_String {
 		std::array<char, S> charArr;
@@ -15,7 +24,7 @@ namespace Xor_ {
 		inline auto operator()() {
 			std::string str{};
 
-			std::transform(charArr.begin(), charArr.end(), std::back_inserter(str), [](auto const& c) {
+			std::transform(charArr.begin(), charArr.end() - 1, std::back_inserter(str), [](auto const& c) {
 				return c ^ S ^ 'f';
 				});
 			return str;
@@ -30,4 +39,4 @@ namespace Xor_ {
 		}
 	};
 }
-#define obf(string) []() { static auto result = Xor_::Xor_String<sizeof(string)/sizeof(char)>(string); return result(); }()
+#define obf(string) []() { static auto result = Obf::Xor_String<sizeof(string)/sizeof(char)>(string); return result(); }()
