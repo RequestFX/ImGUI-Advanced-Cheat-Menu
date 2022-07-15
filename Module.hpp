@@ -1,7 +1,9 @@
 #pragma once
 #include "util/Obf.hpp"
 #include "util/StringH.hpp"
+#include "util/Vec2H.hpp"
 #include "menu/Console.hpp"
+
 #include <string>
 
 class Module {

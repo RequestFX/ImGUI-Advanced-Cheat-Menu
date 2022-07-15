@@ -164,6 +164,7 @@
     <ClCompile Include="ModuleManager.cpp" />
     <ClCompile Include="RCS.cpp" />
     <ClCompile Include="Set.cpp" />
+    <ClCompile Include="SetManager.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="util\ColorH.cpp" />
     <ClCompile Include="util\FileH.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="ModuleManager.hpp" />
     <ClInclude Include="RCS.hpp" />
     <ClInclude Include="Set.hpp" />
+    <ClInclude Include="SetManager.hpp" />
     <ClInclude Include="util\ColorH.hpp" />
     <ClInclude Include="util\FileH.hpp" />
     <ClInclude Include="util\MH.hpp" />
@@ -203,6 +205,7 @@
     <ClInclude Include="util\Singleton.hpp" />
     <ClInclude Include="util\StringH.hpp" />
     <ClInclude Include="util\TimeH.hpp" />
+    <ClInclude Include="util\Vec2H.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

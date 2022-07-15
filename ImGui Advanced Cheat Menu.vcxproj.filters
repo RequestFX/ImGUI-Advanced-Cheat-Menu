@@ -135,6 +135,9 @@
     <ClCompile Include="util\FileH.cpp">
       <Filter>Header Files\util</Filter>
     </ClCompile>
+    <ClCompile Include="SetManager.cpp">
+      <Filter>Header Files\config</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dependencies\imgui-sfml\include\imconfig.h">
@@ -228,6 +231,12 @@
       <Filter>Header Files\config</Filter>
     </ClInclude>
     <ClInclude Include="util\FileH.hpp">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="SetManager.hpp">
+      <Filter>Header Files\config</Filter>
+    </ClInclude>
+    <ClInclude Include="util\Vec2H.hpp">
       <Filter>Header Files\util</Filter>
     </ClInclude>
   </ItemGroup>

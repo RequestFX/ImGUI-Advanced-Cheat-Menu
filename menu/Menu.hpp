@@ -8,6 +8,7 @@ namespace Menu {
 	static ImVec4 winCol = ImVec4(0, 0, 0, 0.9),
 		bgCol = ImVec4(31 / 255.f, 30 / 255.f, 31 / 255.f, 1),
 		childCol = ImVec4(33 / 255.f, 34 / 255.f, 45 / 255.f, 1),
+		childCol1 = ImVec4(38 / 255.f, 39 / 255.f, 50 / 255.f, 1),
 		notSelectedTextColor = ImVec4(0.6, 0.6, 0.6, 1),
 		textCol = ImVec4(1, 1, 1, 1),
 		btnActiveCol = ImVec4(239 / 255.f, 73 / 255.f, 88 / 255.f, 1),
@@ -40,7 +41,6 @@ namespace Menu {
 	void renderSubTab0();
 	void renderSubTab1();
 	void renderSubTab2();
-	void renderSubTab3();
 
 	void render();
 

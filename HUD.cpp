@@ -4,21 +4,28 @@
 #include "menu/imgui_custom.hpp"
 #include "ModuleManager.hpp"
 #include "util/TimeH.hpp"
+#include "SetManager.hpp"
 
 #include <Windows.h>
 
 HUD::HUD() : Module(obf("HUD"), obf("Renders Overlay like ModuleList")) {
-	colML_Bg = ImGuiHelper::rgbaToVec4(0, 0, 0, 100);
-	colML = ImGuiHelper::rgbaToVec4(255, 100, 100, 255);
-	isMLRainbow = true;
-	sortML = 1;
-	speedML = 0.4;
-	offsetML = 0.06;
-	rangeML = 0.022;
+	colML = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(255, 100, 100, 255), obf("colML"), getName())).getVec4();
+	colML_Bg = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(0, 0, 0, 100), obf("colML_Bg"), getName())).getVec4();
+
+	speedML = &SetManager::i().add(new Set(0.4f, 0.1f, 1.f, obf("speedML"), getName())).getVec3f();
+	offsetML = &SetManager::i().add(new Set(0.06f, 0.f, 0.4f, obf("offsetML"), getName())).getVec3f();
+	rangeML = &SetManager::i().add(new Set(0.02f, 0.f, 0.1f, obf("rangeML"), getName())).getVec3f();
+
+	isML = &SetManager::i().add(new Set(false, obf("isML"), getName())).getBVal();
+	isMLRainbow = &SetManager::i().add(new Set(true, obf("isMLRainbow"), getName())).getBVal();
+	isTime = &SetManager::i().add(new Set(false, obf("isTime"), getName())).getBVal();
+
+	alignML = &SetManager::i().add(new Set(0, obf("alignML"), getName())).getIVal();
+	sortML = &SetManager::i().add(new Set(1, obf("sortML"), getName())).getIVal();
 }
 
 void HUD::renderML() {
-	if (!isML) return;
+	if (!*isML) return;
 
 	ImVec2 winPadding = ImGui::GetStyle().WindowPadding;
 	std::vector<std::string*>modules;
@@ -39,7 +46,7 @@ void HUD::renderML() {
 	calcHeight += ImGui::GetStyle().ItemSpacing.y * (modules.size() - 1); // itemspacing;
 
 	ImGui::SetNextWindowSize({ longestStr + winPadding.x * 2, calcHeight });
-	ImGui::PushStyleColor(ImGuiCol_WindowBg, colML_Bg);
+	ImGui::PushStyleColor(ImGuiCol_WindowBg, *colML_Bg);
 	ImGui::Begin("  ", 0, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar);
 	ImGui::PopStyleColor();
 
@@ -47,33 +54,33 @@ void HUD::renderML() {
 
 	}
 
-	if (isMLRainbow) {
+	if (*isMLRainbow) {
 		for (int i = 0; i < modules.size(); i++) {
 			std::string* str = modules.at(i);
 			float h, s, v;
-			ColorH::RGBtoHSV(colML.x, colML.y, colML.z, h, s, v);
+			ColorH::RGBtoHSV(colML->x, colML->y, colML->z, h, s, v);
 
-			if ((alignML == 1 || alignML == 2) && i != 0) {
+			if ((*alignML == 1 || *alignML == 2) && i != 0) {
 				float width = ImGui::CalcTextSize(str->c_str()).x;
-				if (alignML == 1) ImGui::Dummy(ImVec2(longestStr - width - ImGui::GetStyle().ItemSpacing.x, 0));
+				if (*alignML == 1) ImGui::Dummy(ImVec2(longestStr - width - ImGui::GetStyle().ItemSpacing.x, 0));
 				else ImGui::Dummy(ImVec2((longestStr - width) * 0.5 - ImGui::GetStyle().ItemSpacing.x, 0));
 				ImGui::SameLine();
 			}
-			ImGui::chromaText(*str, s, v, colML.w, i * (offsetML + 1), speedML, rangeML);
+			ImGui::chromaText(*str, s, v, colML->w, i * (offsetML->x + 1), speedML->x, rangeML->x);
 		}
 	}
 	else {
 		for (int i = 0; i < modules.size(); i++) {
 			std::string* str = modules.at(i);
 
-			if ((alignML == 1 || alignML == 2) && i != 0) {
+			if ((*alignML == 1 || *alignML == 2) && i != 0) {
 				float width = ImGui::CalcTextSize(str->c_str()).x;
-				if (alignML == 1) ImGui::Dummy(ImVec2(longestStr - width - ImGui::GetStyle().ItemSpacing.x, 0));
+				if (*alignML == 1) ImGui::Dummy(ImVec2(longestStr - width - ImGui::GetStyle().ItemSpacing.x, 0));
 				else ImGui::Dummy(ImVec2((longestStr - width) * 0.5 - ImGui::GetStyle().ItemSpacing.x, 0));
 				ImGui::SameLine();
 			}
 
-			ImGui::PushStyleColor(ImGuiCol_Text, colML);
+			ImGui::PushStyleColor(ImGuiCol_Text, *colML);
 			ImGui::Text(str->c_str());
 			ImGui::PopStyleColor();
 		}

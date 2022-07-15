@@ -11,4 +11,5 @@ namespace StringH {
 	bool equalsIgnoreCase(std::string a, std::string b);
 	std::string strToBytes(std::string s);
 	std::string bytesToStr(std::string s);
+	std::string getFileNameFromPath(std::string s);
 }

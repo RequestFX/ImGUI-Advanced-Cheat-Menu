@@ -5,11 +5,13 @@
 #include "../Marker.hpp"
 #include "../AimAssist.hpp"
 #include "../ModuleManager.hpp"
-#include "../util/ColorH.hpp"
 
+#include "../Config.hpp"
+#include "../util/ColorH.hpp"
 #include "../util/Obf.hpp"
 #include "Fonts.hpp"
 #include "Settings.hpp"
+
 #include <vector>
 #include <imgui-SFML.h>
 #include <Windows.h>
@@ -170,11 +172,13 @@ void Menu::renderSubTab0() {
 		ImGui::Checkbox_(obf("Enabled").c_str(), &AimAssist::i().isToggled());
 		ImGui::SameLine();
 
-		ImGuiHelper::renderCombo(" ", { obf("Toggle"), obf("Hold") }, AimAssist::i().onHold, 80);
+		int i = *AimAssist::i().onHold;
+
+		ImGuiHelper::renderCombo(" ", { obf("Toggle"), obf("Hold") }, *AimAssist::i().onHold, 80);
 
 		ImGui::Hotkey(obf("Hotkey").c_str(), AimAssist::i().getKey());
 
-		ImGuiHelper::renderCombo(obf("Target Selection"), { obf("By Distance"), obf("By Health") }, AimAssist::i().targetSelection, elementSize);
+		ImGuiHelper::renderCombo(obf("Target Selection"), { obf("By Distance"), obf("By Health") }, *AimAssist::i().targetSelection, elementSize);
 		std::string targets = "";
 		if (AimAssist::i().isEnemy || AimAssist::i().isMate || AimAssist::i().isBot) { // atleast one target
 			if (AimAssist::i().isEnemy && AimAssist::i().isMate && AimAssist::i().isBot) targets = obf("All");
@@ -189,36 +193,36 @@ void Menu::renderSubTab0() {
 
 		ImGui::PushItemWidth(elementSize);
 		if (ImGui::BeginCombo(obf("Targets").c_str(), targets.c_str(), 0)) {
-			ImGui::Checkbox_(obf("Enemy").c_str(), &AimAssist::i().isEnemy);
-			ImGui::Checkbox_(obf("Mate").c_str(), &AimAssist::i().isMate);
-			ImGui::Checkbox_(obf("Bot").c_str(), &AimAssist::i().isBot);
+			ImGui::Checkbox_(obf("Enemy").c_str(), AimAssist::i().isEnemy);
+			ImGui::Checkbox_(obf("Mate").c_str(), AimAssist::i().isMate);
+			ImGui::Checkbox_(obf("Bot").c_str(), AimAssist::i().isBot);
 			ImGui::EndCombo();
 		}
 		ImGui::PopItemWidth();
 
-		ImGuiHelper::renderCombo(obf("Hitbox"), { obf("Head"), obf("Neck"), obf("Body"), obf("Arms"), obf("Hip"), obf("Legs") }, AimAssist::i().hitbox, elementSize);
+		ImGuiHelper::renderCombo(obf("Hitbox"), { obf("Head"), obf("Neck"), obf("Body"), obf("Arms"), obf("Hip"), obf("Legs") }, *AimAssist::i().hitbox, elementSize);
 
 		ImGui::PushItemWidth(elementSize);
-		ImGui::SliderInt_(obf("Reaction ms").c_str(), &AimAssist::i().reactionTime, 0, 1000);
+		ImGui::SliderInt_(obf("Reaction ms").c_str(), AimAssist::i().reactionTime, 0, 1000);
 		ImGui::PopItemWidth();
 
 		ImGui::PushItemWidth(elementSize);
-		ImGui::SliderInt_(obf("FOV").c_str(), &AimAssist::i().fov, 0, 360);
+		ImGui::SliderInt_(obf("FOV").c_str(), AimAssist::i().fov, 0, 360);
 		ImGui::PopItemWidth();
-		ImGui::Checkbox_(obf("Relative FOV").c_str(), &AimAssist::i().relativeFOV);
-		ImGui::Checkbox_(obf("No Snap").c_str(), &AimAssist::i().noSnap);
-		ImGui::Checkbox_(obf("No Lock").c_str(), &AimAssist::i().noLock);
+		ImGui::Checkbox_(obf("Relative FOV").c_str(), AimAssist::i().relativeFOV);
+		ImGui::Checkbox_(obf("No Snap").c_str(), AimAssist::i().noSnap);
+		ImGui::Checkbox_(obf("No Lock").c_str(), AimAssist::i().noLock);
 		ImGui::EndChild();
 
 		ImGui::Spacing();
 
 		ImGui::BeginChild(obf("aimassist2").c_str(), ImVec2(ImGuiHelper::getWidth(), ImGuiHelper::getHeight()), true);
 		ImGui::Checkbox_(obf("Enable Recoil Control").c_str(), &RCS::i().isToggled());
-		ImGui::Checkbox_(obf("Standalone").c_str(), &RCS::i().standalone);
+		ImGui::Checkbox_(obf("Standalone").c_str(), RCS::i().standalone);
 
 		ImGui::PushItemWidth(elementSize);
-		ImGui::SliderFloat_(obf("X Strength").c_str(), &RCS::i().xPow, 0.1, 1);
-		ImGui::SliderFloat_(obf("Y Strength").c_str(), &RCS::i().yPow, 0.1, 1);
+		ImGui::SliderFloat_(obf("X Strength").c_str(), &RCS::i().xPow->x, 0.1, 1);
+		ImGui::SliderFloat_(obf("Y Strength").c_str(), &RCS::i().yPow->x, 0.1, 1);
 		ImGui::PopItemWidth();
 
 		ImGui::EndChild();
@@ -263,9 +267,9 @@ void Menu::renderSubTab1() {
 
 		ImGui::PushItemWidth(elementSize);
 		if (ImGui::BeginCombo(obf("Type").c_str(), obf("Type").c_str(), 0)) {
-			ImGui::Checkbox_(obf("Enemy").c_str(), &ESP::i().isEnemy);
-			ImGui::Checkbox_(obf("Mate").c_str(), &ESP::i().isMate);
-			ImGui::Checkbox_(obf("Bot").c_str(), &ESP::i().isBot);
+			ImGui::Checkbox_(obf("Enemy").c_str(), ESP::i().isEnemy);
+			ImGui::Checkbox_(obf("Mate").c_str(), ESP::i().isMate);
+			ImGui::Checkbox_(obf("Bot").c_str(), ESP::i().isBot);
 
 			ImGui::EndCombo();
 		}
@@ -273,27 +277,27 @@ void Menu::renderSubTab1() {
 
 		ImGui::PushItemWidth(elementSize);
 		if (ImGui::BeginCombo(obf("2D Box Style").c_str(), obf("Style").c_str(), 0)) {
-			ImGui::Checkbox_(obf("2D Box").c_str(), &ESP::i().is2DBox);
-			ImGui::ColorEdit4(obf("2D Box Color##1").c_str(), (float*)&ESP::i().col2DBox, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
-			ImGui::Checkbox_(obf("2D Box Based on Health").c_str(), &ESP::i().is2DBoxHealthBased);
+			ImGui::Checkbox_(obf("2D Box").c_str(), ESP::i().is2DBox);
+			ImGui::ColorEdit4(obf("2D Box Color##1").c_str(), (float*)ESP::i().col2DBox, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+			ImGui::Checkbox_(obf("2D Box Based on Health").c_str(), ESP::i().is2DBoxHealthBased);
 			ImGui::EndCombo();
 		}
 		if (ImGui::BeginCombo(obf("Skeleton Style").c_str(), obf("Style").c_str(), 0)) {
-			ImGui::Checkbox_(obf("Skeleton").c_str(), &ESP::i().isSkeleton);
-			ImGui::ColorEdit4(obf("Skeleton Color##1").c_str(), (float*)&ESP::i().colSkeleton, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
-			ImGui::Checkbox_(obf("Skeleton Based on Health").c_str(), &ESP::i().isSkeletonHealthBased);
+			ImGui::Checkbox_(obf("Skeleton").c_str(), ESP::i().isSkeleton);
+			ImGui::ColorEdit4(obf("Skeleton Color##1").c_str(), (float*)ESP::i().colSkeleton, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+			ImGui::Checkbox_(obf("Skeleton Based on Health").c_str(), ESP::i().isSkeletonHealthBased);
 			ImGui::EndCombo();
 		}
 		if (ImGui::BeginCombo(obf("Healthbar Style").c_str(), obf("Style").c_str(), 0)) {
-			ImGui::Checkbox_(obf("Healthbar").c_str(), &ESP::i().isHealthBar);
+			ImGui::Checkbox_(obf("Healthbar").c_str(), ESP::i().isHealthBar);
 			ImGui::ColorEdit4(obf("Healthbar Color##1").c_str(), (float*)&ESP::i().colHealthBar, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
-			ImGui::Checkbox_(obf("Healthbar Based on Health").c_str(), &ESP::i().isHealthBarHealthBased);
+			ImGui::Checkbox_(obf("Healthbar Based on Health").c_str(), ESP::i().isHealthBarHealthBased);
 			ImGui::EndCombo();
 		}
 		if (ImGui::BeginCombo(obf("Head Circle Style").c_str(), obf("Style").c_str(), 0)) {
-			ImGui::Checkbox_(obf("Head Circle").c_str(), &ESP::i().isHeadCircle);
-			ImGui::ColorEdit4(obf("Head Circle Color##1").c_str(), (float*)&ESP::i().colHeadCircle, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
-			ImGui::Checkbox_(obf("Head Circle Based on Health").c_str(), &ESP::i().isHeadCircleHealthBased);
+			ImGui::Checkbox_(obf("Head Circle").c_str(), ESP::i().isHeadCircle);
+			ImGui::ColorEdit4(obf("Head Circle Color##1").c_str(), (float*)ESP::i().colHeadCircle, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+			ImGui::Checkbox_(obf("Head Circle Based on Health").c_str(), ESP::i().isHeadCircleHealthBased);
 			ImGui::EndCombo();
 		}
 		ImGui::PopItemWidth();
@@ -304,9 +308,9 @@ void Menu::renderSubTab1() {
 
 		ImGui::BeginChild(obf("Markers").c_str(), ImVec2(ImGuiHelper::getWidth(), ImGuiHelper::getHeight()), true);
 		ImGui::Checkbox_(obf("Enable Markers").c_str(), &Marker::i().isToggled());
-		ImGui::ColorEdit4(obf("Marker Color##1").c_str(), (float*)&Marker::i().col, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
-		ImGui::Checkbox_(obf("Render Behind").c_str(), &Marker::i().renderBehind);
-		ImGui::Checkbox_(obf("Render Infront").c_str(), &Marker::i().renderInfront);
+		ImGui::ColorEdit4(obf("Marker Color##1").c_str(), (float*)Marker::i().col, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+		ImGui::Checkbox_(obf("Render Behind").c_str(), Marker::i().renderBehind);
+		ImGui::Checkbox_(obf("Render Infront").c_str(), Marker::i().renderInfront);
 		ImGui::EndChild();
 
 		ImGui::NextColumn();
@@ -346,19 +350,19 @@ void Menu::renderSubTab2() {
 
 		ImGui::BeginChild(obf("misc##0-0").c_str(), ImVec2(ImGuiHelper::getWidth(), 300), true);
 		ImGui::Checkbox_(obf("Show HUD").c_str(), &HUD::i().isToggled());
-		ImGui::Checkbox_(obf("Show ModuleList").c_str(), &HUD::i().isML);
+		ImGui::Checkbox_(obf("Show ModuleList").c_str(), HUD::i().isML);
 		ImGui::PushItemWidth(elementSize);
 		if (ImGui::BeginCombo(obf("ModuleList Style").c_str(), obf("Style").c_str(), 0)) {
-			ImGui::ColorEdit4(obf("ModuleList Color##1").c_str(), (float*)&HUD::i().colML, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
-			ImGui::Checkbox_(obf("Rainbow Color").c_str(), &HUD::i().isMLRainbow);
+			ImGui::ColorEdit4(obf("ModuleList Color##1").c_str(), (float*)&HUD::i().colML->x, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+			ImGui::Checkbox_(obf("Rainbow Color").c_str(), HUD::i().isMLRainbow);
 			ImGui::PushItemWidth(elementSize);
-			ImGui::SliderFloat_(obf("ModuleList Speed").c_str(), &HUD::i().speedML, 0.1, 1);
-			ImGui::SliderFloat_(obf("ModuleList Offset").c_str(), &HUD::i().offsetML, 0, 0.4);
-			ImGui::SliderFloat_(obf("ModuleList Range").c_str(), &HUD::i().rangeML, 0, 0.1);
+			ImGui::SliderFloat_(obf("ModuleList Speed").c_str(), &HUD::i().speedML->x, 0.1, 1);
+			ImGui::SliderFloat_(obf("ModuleList Offset").c_str(), &HUD::i().offsetML->x, 0, 0.4);
+			ImGui::SliderFloat_(obf("ModuleList Range").c_str(), &HUD::i().rangeML->x, 0, 0.1);
 			ImGui::PopItemWidth();
-			ImGui::ColorEdit4(obf("Background Color##1").c_str(), (float*)&HUD::i().colML_Bg, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
-			ImGuiHelper::renderCombo(obf("Sort"), { obf("ASC"), obf("DSC") }, HUD::i().sortML, elementSize);
-			ImGuiHelper::renderCombo(obf("Align"), { obf("Left"), obf("Right"), obf("Middle") }, HUD::i().alignML, elementSize);
+			ImGui::ColorEdit4(obf("Background Color##1").c_str(), (float*)&HUD::i().colML_Bg->x, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+			ImGuiHelper::renderCombo(obf("Sort"), { obf("ASC"), obf("DSC") }, *HUD::i().sortML, elementSize);
+			ImGuiHelper::renderCombo(obf("Align"), { obf("Left"), obf("Right"), obf("Middle") }, *HUD::i().alignML, elementSize);
 
 			ImGui::EndCombo();
 		}
@@ -410,12 +414,6 @@ void Menu::renderSubTab2() {
 	ImGui::EndChild();
 }
 
-void Menu::renderSubTab3() {
-	ImGui::BeginChild(obf("config-tab").c_str(), ImVec2(ImGuiHelper::getWidth(), ImGuiHelper::getHeight()), false);
-
-	ImGui::EndChild();
-}
-
 void Menu::render() {
 	HUD::i().render();
 
@@ -450,7 +448,7 @@ void Menu::render() {
 			break;
 		}
 		case 3: {
-			renderSubTab3();// for config, save current(new), load, delete, duplicate, overwrite
+			Config::i().renderImGui();// for config, save current(new), load, delete, duplicate, overwrite
 			break;
 		}
 		}

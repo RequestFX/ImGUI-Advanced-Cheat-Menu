@@ -7,11 +7,11 @@
 class HUD : public Singleton<HUD>, public Module {
 	friend class Singleton<HUD>;
 public:
-	int alignML, sortML;
-	ImVec4 colML, colML_Bg;
-	float speedML, offsetML, rangeML;
-	bool isML, isMLRainbow, // render Module List
-		isTime;
+	int* alignML, * sortML;
+	ImVec4* colML, * colML_Bg;
+	Vec3f* speedML, *offsetML, *rangeML;
+	bool* isML, * isMLRainbow, // render Module List
+		* isTime;
 
 	HUD();
 	void render();

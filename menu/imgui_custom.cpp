@@ -10,6 +10,7 @@
 
 
 
+
 bool ImGui::Checkbox_(const char* label, bool* v) {
 	if (STYLE == 0) return Checkbox2(label, v);
 }
@@ -114,7 +115,7 @@ bool ImGui::Hotkey(const char* label, int& key, float samelineOffset, const ImVe
 		for (auto i = VK_MBUTTON; i <= VK_PACKET; i++) {
 			//if (io.KeysDown[i]) {
 			if (i == VK_ESCAPE) continue;
-			if (GetAsyncKeyState(i)) {
+			if (GetAsyncKeyState(i) & 0x8000) { // 0x8000 Flag checks if Key is currently being hold
 				key = i;
 			}
 		}
@@ -127,7 +128,7 @@ void ImGui::chromaText(std::string text, float sat, float value, float alpha, fl
 	for (int i = 0; i < text.length(); i++) {
 		char c = text.c_str()[i];
 		std::string s(1, text.at(i));
-		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(-0.5, 4)); // not the best way but decent
+		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(-0.5, 4)); // not the best way, calculating string width will be slightly inaccurate
 		float r, g, b;
 		ColorH::HSVtoRGB(ColorH::getTimeHue(i * range, speed, offset), sat, value, r, g, b);
 		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(r, g, b, alpha));

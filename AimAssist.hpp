@@ -7,8 +7,8 @@
 class AimAssist : public Singleton<AimAssist>, public Module {
 	friend class Singleton<AimAssist>;
 public:
-	bool isEnemy, isMate, isBot, relativeFOV, noSnap, noLock;
-	int hitbox, targetSelection, onHold, reactionTime, fov;
+	bool* isEnemy, * isMate, * isBot, * relativeFOV, * noSnap, * noLock;
+	int* hitbox, * targetSelection, * onHold, * reactionTime, * fov;
 
 	AimAssist();
 

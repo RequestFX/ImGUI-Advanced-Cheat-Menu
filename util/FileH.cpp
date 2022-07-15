@@ -41,7 +41,7 @@ std::string FileH::getRoamingPath() {
 	return path;
 }
 
-std::string FileH::getProjectPath() {
+std::string FileH::getProjPath() {
 	std::string roaming = getRoamingPath() + PATHNAME;
 	if (!fs::exists(roaming))
 		if (!fs::create_directory(roaming)) {
@@ -50,5 +50,33 @@ std::string FileH::getProjectPath() {
 			exit(1);
 		}
 
-	return roaming.c_str();
+	return roaming;
+}
+
+std::string FileH::getProjCfgPath() {
+	std::string cfgFolder = getProjPath() + CFGNAME;
+	if (!fs::exists(cfgFolder))
+		if (!fs::create_directory(cfgFolder)) {
+			cfgFolder = obf("Failed to create a Folder at: ").c_str() + cfgFolder;
+			MessageBoxA(0, cfgFolder.c_str(), 0, 0);
+			exit(1);
+		}
+
+	return cfgFolder;
+}
+
+std::vector<std::string> FileH::getFilesInDir(std::string path) {
+	std::vector<std::string> out;
+	for (const auto& entry : fs::directory_iterator(path)) {
+		if (entry.is_regular_file()) out.push_back(entry.path().string());
+	}
+	return out;
+}
+
+bool FileH::deleteFile(std::string filePath) {
+	if (fs::exists(filePath) && fs::is_regular_file(filePath)) {
+		return fs::remove(filePath);
+	}
+
+	return false;
 }

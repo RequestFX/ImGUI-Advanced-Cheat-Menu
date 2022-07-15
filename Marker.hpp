@@ -7,9 +7,9 @@
 class Marker : public Singleton<Marker>, public Module {
 	friend class Singleton<Marker>;
 public:
-	ImVec4 col;
-	bool renderWhenVisible; // always render, only when visible, only when not visible, 
-	bool renderBehind, renderInfront;
+	ImVec4* col;
+	bool* renderWhenVisible;
+	bool* renderBehind, * renderInfront;
 
 	Marker();
 

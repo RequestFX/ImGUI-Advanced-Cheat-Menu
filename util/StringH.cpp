@@ -193,3 +193,11 @@ std::string StringH::bytesToStr(std::string s) {
 	}
 	return out;
 }
+
+std::string StringH::getFileNameFromPath(std::string s) {
+	int i1 = s.find_last_of("\\");
+
+	std::string out = s.substr(i1 + 1);
+	out = out.substr(0, out.find_last_of("."));
+	return out;
+}

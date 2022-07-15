@@ -7,8 +7,8 @@
 class RCS : public Singleton<RCS>, public Module {
 	friend class Singleton<RCS>;
 public:
-	bool standalone;
-	float xPow, yPow;
+	bool* standalone;
+	Vec3f* xPow, * yPow;
 
 	RCS();
 
