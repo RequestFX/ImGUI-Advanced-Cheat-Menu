@@ -1,25 +1,28 @@
 #pragma once
 
+#include "../util/Obf.hpp"
 #include "imgui_custom.hpp"
+#include "../SetManager.hpp"
+
 #include <string>
 #include <SFML/Graphics.hpp>
 
 namespace Menu {
-	static ImVec4 winCol = ImVec4(0, 0, 0, 0.9),
-		bgCol = ImVec4(31 / 255.f, 30 / 255.f, 31 / 255.f, 1),
-		childCol = ImVec4(33 / 255.f, 34 / 255.f, 45 / 255.f, 1),
-		childCol1 = ImVec4(38 / 255.f, 39 / 255.f, 50 / 255.f, 1),
-		notSelectedTextColor = ImVec4(0.6, 0.6, 0.6, 1),
-		textCol = ImVec4(1, 1, 1, 1),
-		btnActiveCol = ImVec4(239 / 255.f, 73 / 255.f, 88 / 255.f, 1),
-		btnHoverCol = ImVec4(173 / 255.f, 55 / 255.f, 65 / 255.f, 1),
+	inline ImVec4* winCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(0, 0, 0, 230), obf("winCol"))).getVec4(),
+		* bgCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(31, 30, 31, 255), obf("bgCol"))).getVec4(),
+		* childCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(33, 34, 45, 255), obf("childCol"))).getVec4(),
+		* childCol1 = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(38, 39, 50, 255), obf("childCol1"))).getVec4(),
+		* notSelectedTextColor = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(140, 140, 140, 255), obf("notSelectedTextColor"))).getVec4(),
+		* textCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(255, 255, 255, 255), obf("textCol"))).getVec4(),
+		* btnActiveCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(239, 73, 88, 255), obf("btnActiveCol"))).getVec4(),
+		* btnHoverCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(173, 55, 65, 255), obf("btnHoverCol"))).getVec4(),
 
-		frameCol = ImVec4(44 / 255.f, 43 / 255.f, 44 / 255.f, 1),
-		hoverCol = ImVec4(37 / 255.f, 36 / 255.f, 37 / 255.f, 1),
-		itemCol = ImVec4(240 / 255.f, 74 / 255.f, 88 / 255.f, 1),
-		itemActiveCol = ImVec4(240 / 255.f, 50 / 255.f, 66 / 255.f, 1),
-		resizeGripCol = ImVec4(220 / 255.f, 50 / 255.f, 66 / 255.f, 0.4),
-		resizeGripHoverCol = ImVec4(250 / 255.f, 50 / 255.f, 66 / 255.f, 0.6);
+		* frameCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(44, 43, 44, 255), obf("frameCol"))).getVec4(),
+		* hoverCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(37, 36, 37, 255), obf("hoverCol"))).getVec4(),
+		* itemCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(240, 74, 88, 255), obf("hoverCol"))).getVec4(),
+		* itemActiveCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(240, 50, 66, 255), obf("hoverCol"))).getVec4(),
+		* resizeGripCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(220, 50, 66, 120), obf("hoverCol"))).getVec4(),
+		* resizeGripHoverCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(250, 50, 66, 140), obf("hoverCol"))).getVec4();
 
 	static bool isGUIVisible = true;
 

@@ -5,6 +5,7 @@
 #include "ModuleManager.hpp"
 #include "util/TimeH.hpp"
 #include "SetManager.hpp"
+#include "menu/Menu.hpp"
 
 #include <Windows.h>
 
@@ -22,6 +23,27 @@ HUD::HUD() : Module(obf("HUD"), obf("Renders Overlay like ModuleList")) {
 
 	alignML = &SetManager::i().add(new Set(0, obf("alignML"), getName())).getIVal();
 	sortML = &SetManager::i().add(new Set(1, obf("sortML"), getName())).getIVal();
+}
+
+void HUD::renderImGui() {
+	ImGui::Checkbox_(obf("Show HUD").c_str(), &isToggled());
+	ImGui::Checkbox_(obf("Show ModuleList").c_str(), isML);
+	ImGui::PushItemWidth(Menu::elementSize);
+	if (ImGui::BeginCombo(obf("ModuleList Style").c_str(), obf("Style").c_str(), 0)) {
+		ImGui::ColorEdit4(obf("ModuleList Color##1").c_str(), (float*)&colML->x, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+		ImGui::Checkbox_(obf("Rainbow Color").c_str(), isMLRainbow);
+		ImGui::PushItemWidth(Menu::elementSize);
+		ImGui::SliderFloat_(obf("ModuleList Speed").c_str(), &speedML->x, speedML->y, speedML->z);
+		ImGui::SliderFloat_(obf("ModuleList Offset").c_str(), &offsetML->x, offsetML->y, offsetML->z);
+		ImGui::SliderFloat_(obf("ModuleList Range").c_str(), &rangeML->x, rangeML->y, rangeML->z);
+		ImGui::PopItemWidth();
+		ImGui::ColorEdit4(obf("Background Color##1").c_str(), (float*)&colML_Bg->x, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+		ImGuiHelper::renderCombo(obf("Sort"), { obf("ASC"), obf("DSC") }, *sortML, Menu::elementSize);
+		ImGuiHelper::renderCombo(obf("Align"), { obf("Left"), obf("Right"), obf("Middle") }, *alignML, Menu::elementSize);
+
+		ImGui::EndCombo();
+	}
+	ImGui::PopItemWidth();
 }
 
 void HUD::renderML() {

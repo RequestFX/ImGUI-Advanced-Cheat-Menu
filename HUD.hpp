@@ -14,6 +14,7 @@ public:
 		* isTime;
 
 	HUD();
+	void renderImGui();
 	void render();
 	void renderML();
 

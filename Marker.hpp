@@ -12,6 +12,7 @@ public:
 	bool* renderBehind, * renderInfront;
 
 	Marker();
+	void renderImGui();
 
 	void onEnable() override {}
 	void onDisable() override {}

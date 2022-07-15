@@ -8,9 +8,11 @@ class AimAssist : public Singleton<AimAssist>, public Module {
 	friend class Singleton<AimAssist>;
 public:
 	bool* isEnemy, * isMate, * isBot, * relativeFOV, * noSnap, * noLock;
-	int* hitbox, * targetSelection, * onHold, * reactionTime, * fov;
+	int* hitbox, * targetSelection, * onHold;
+	Vec3i* reactTime, * fov;
 
 	AimAssist();
+	void renderImGui();
 
 	void onEnable() override {}
 	void onDisable() override {}

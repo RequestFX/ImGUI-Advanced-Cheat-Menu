@@ -127,6 +127,8 @@ bool Config::load(std::string filePath) {
 	}
 	load.close();
 
+	Menu::setColors(); // update Colors
+
 	return true;
 }
 
@@ -139,7 +141,7 @@ void Config::renderImGui() {
 		std::string& cfg = cfgs.at(i);
 		std::string cfgName = StringH::getFileNameFromPath(cfg);
 
-		ImGui::PushStyleColor(ImGuiCol_ChildBg, Menu::childCol1);
+		ImGui::PushStyleColor(ImGuiCol_ChildBg, *Menu::childCol1);
 		ImGui::BeginChild((obf("Config##") + std::to_string(i)).c_str(), ImVec2(ImGuiHelper::getWidth(), 80), true);
 		ImGui::PopStyleColor();
 

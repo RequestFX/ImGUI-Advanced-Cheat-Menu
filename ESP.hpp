@@ -12,6 +12,7 @@ public:
 		* isSkeletonHealthBased, * is2DBoxHealthBased, * isHealthBarHealthBased, * isHeadCircleHealthBased;
 
 	ESP();
+	void renderImGui();
 
 	void onEnable() override {}
 	void onDisable() override {}

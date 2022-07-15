@@ -11,6 +11,7 @@ public:
 	Vec3f* xPow, * yPow;
 
 	RCS();
+	void renderImGui();
 
 	void onEnable() override {}
 	void onDisable() override {}

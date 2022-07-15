@@ -37,7 +37,7 @@ void ImGuiHelper::drawTabHorizontally(std::string childName, ImVec2 childSize, s
 	for (int i = 0; i < tabNames.size(); i++) {
 		std::string it = tabNames.at(i);
 		ImGui::PushStyleColor(ImGuiCol_Button, selectedSubTab == i ? ImGui::GetStyle().Colors[ImGuiCol_ButtonActive] : ImGui::GetStyle().Colors[ImGuiCol_Button]);
-		ImGui::PushStyleColor(ImGuiCol_Text, selectedSubTab == i ? ImGui::GetStyle().Colors[ImGuiCol_Text] : Menu::notSelectedTextColor);
+		ImGui::PushStyleColor(ImGuiCol_Text, selectedSubTab == i ? ImGui::GetStyle().Colors[ImGuiCol_Text] : *Menu::notSelectedTextColor);
 
 
 		if (ImGui::Button(it.c_str(), ImVec2(btnWidth, btnHeight))) selectedSubTab = i;
