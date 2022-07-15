@@ -24,13 +24,13 @@ namespace Menu {
 		* resizeGripCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(220, 50, 66, 120), obf("hoverCol"))).getVec4(),
 		* resizeGripHoverCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(250, 50, 66, 140), obf("hoverCol"))).getVec4();
 
-	static bool isGUIVisible = true;
+	inline bool isGUIVisible = true;
 
-	static ImGuiStyle* style;
-	static int selectedTab = 0, selectedSubTab0 = 0, selectedSubTab1 = 0, selectedSubTab2 = 0, elementSize = 120;
+	inline ImGuiStyle* style;
+	inline int selectedTab = 0, selectedSubTab0 = 0, selectedSubTab1 = 0, selectedSubTab2 = 0, elementSize = 120;
 
-	static sf::Texture* logoTx;
-	static ImFont* bigFont;
+	inline sf::Texture* logoTx;
+	inline ImFont* bigFont;
 
 	void setColors();
 

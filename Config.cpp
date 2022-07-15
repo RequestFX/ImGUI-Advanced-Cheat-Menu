@@ -95,34 +95,35 @@ bool Config::load(std::string filePath) {
 			Set* set = isID2 ? SetManager::i().getSetByName(lineArr[2], lineArr[3]) : SetManager::i().getSetByName(lineArr[2]);
 			if (!set) continue; // if module is NULL continue
 
-			try{
+			try {
 
-			if (set->isBool()) {
-				set->setBVal(std::atoi(lineArr[idx].c_str()));
-			}
-			else if (set->isInt()) {
-				set->setIVal(std::atoi(lineArr[idx].c_str()));
-			}
-			else if (set->isFloat()) {
-				set->setFVal(std::atof(lineArr[idx].c_str()));
-			}
-			else if (set->isDouble()) {
-				set->setDVal(std::atof(lineArr[idx].c_str()));
-			}
-			else if (set->isISlider()) {
-				set->setVec3i(std::atoi(lineArr[idx].c_str()), std::atoi(lineArr[idx + 1].c_str()), std::atoi(lineArr[idx + 2].c_str()));
-			}
-			else if (set->isFSlider()) {
-				set->setVec3f(std::atof(lineArr[idx].c_str()), std::atof(lineArr[idx + 1].c_str()), std::atof(lineArr[idx + 2].c_str()));
-			}
-			else if (set->isDSlider()) {
-				set->setVec3d(std::atof(lineArr[idx].c_str()), std::atof(lineArr[idx + 1].c_str()), std::atof(lineArr[idx + 2].c_str()));
-			}
-			else if (set->isVec4()) {
-				set->setVec4(ImVec4(std::atof(lineArr[idx].c_str()), std::atof(lineArr[idx + 1].c_str()), std::atof(lineArr[idx + 2].c_str()),std::atof(lineArr[idx + 3].c_str())));
-			}
+				if (set->isBool()) {
+					set->setBVal(std::atoi(lineArr[idx].c_str()));
+				}
+				else if (set->isInt()) {
+					set->setIVal(std::atoi(lineArr[idx].c_str()));
+				}
+				else if (set->isFloat()) {
+					set->setFVal(std::atof(lineArr[idx].c_str()));
+				}
+				else if (set->isDouble()) {
+					set->setDVal(std::atof(lineArr[idx].c_str()));
+				}
+				else if (set->isISlider()) {
+					set->setVec3i(std::atoi(lineArr[idx].c_str()), std::atoi(lineArr[idx + 1].c_str()), std::atoi(lineArr[idx + 2].c_str()));
+				}
+				else if (set->isFSlider()) {
+					set->setVec3f(std::atof(lineArr[idx].c_str()), std::atof(lineArr[idx + 1].c_str()), std::atof(lineArr[idx + 2].c_str()));
+				}
+				else if (set->isDSlider()) {
+					set->setVec3d(std::atof(lineArr[idx].c_str()), std::atof(lineArr[idx + 1].c_str()), std::atof(lineArr[idx + 2].c_str()));
+				}
+				else if (set->isVec4()) {
+					set->setVec4(ImVec4(std::atof(lineArr[idx].c_str()), std::atof(lineArr[idx + 1].c_str()), std::atof(lineArr[idx + 2].c_str()), std::atof(lineArr[idx + 3].c_str())));
+				}
 
-			}catch(...){}
+			}
+			catch (...) {}
 		}
 	}
 	load.close();
@@ -132,10 +133,39 @@ bool Config::load(std::string filePath) {
 	return true;
 }
 
+static int InputTextCallback(ImGuiInputTextCallbackData* data) {
+	if (data->EventFlag == ImGuiInputTextFlags_CallbackResize) {
+		// Resize string callback
+		std::string* str = (std::string*)data->UserData;
+		IM_ASSERT(data->Buf == str->c_str());
+		str->resize(data->BufTextLen);
+		data->Buf = (char*)str->c_str();
+	}
+	return 0;
+}
+
 void Config::renderImGui() {
 	checkCfgs(); // TODO: load on config change events
 
-	ImGui::BeginChild(obf("config-tab").c_str(), ImVec2(ImGuiHelper::getWidth(), ImGuiHelper::getHeight()), true);
+	ImGui::BeginChild(obf("configs-bar").c_str(), ImVec2(ImGuiHelper::getWidth(), 50), true, ImGuiWindowFlags_NoScrollbar);
+	ImGui::PushFont(Menu::bigFont);
+	ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 10,5 });
+	ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 6);
+	static std::string cfgName = "";
+	ImGui::InputTextWithHint("##1", obf(ICON_FA_SAVE" Config Name").c_str(), (char*)cfgName.c_str(), cfgName.size(), ImGuiInputTextFlags_CallbackResize, InputTextCallback, (void*)&cfgName);
+	ImGui::PopStyleVar(2);
+	ImGui::PopFont();
+
+	ImGui::SameLine();
+	if (ImGui::Button("Save")) {
+		save(FileH::getProjCfgPath() + "\\" + cfgName + obf(".ini"));
+		cfgName = "";
+	}
+
+	ImGui::EndChild();
+	ImGui::Spacing();
+
+	ImGui::BeginChild(obf("configs-tab").c_str(), ImVec2(ImGuiHelper::getWidth(), ImGuiHelper::getHeight()), true);
 
 	for (int i = 0; i < cfgs.size(); i++) {
 		std::string& cfg = cfgs.at(i);

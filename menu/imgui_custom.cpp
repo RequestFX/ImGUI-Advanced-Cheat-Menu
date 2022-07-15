@@ -19,6 +19,7 @@ bool ImGui::SliderFloat_(const char* label, float* v, float v_min, float v_max, 
 }
 bool ImGui::SliderInt_(const char* label, int* v, int v_min, int v_max, const char* format, ImGuiSliderFlags flags) {
 	if (STYLE == 0) return SliderInt_2(label, v, v_min, v_max, format, flags);
+	//if (STYLE == 1) return SliderInt_2(label, v, v_min, v_max, format, flags);
 }
 
 
@@ -78,13 +79,19 @@ bool ImGui::Checkbox2(const char* label, bool* v) {
 	IMGUI_TEST_ENGINE_ITEM_INFO(id, label, g.LastItemData.StatusFlags | ImGuiItemStatusFlags_Checkable | (*v ? ImGuiItemStatusFlags_Checked : 0));
 	return pressed;
 }
+
+bool ImGui::SliderFloat_3(const char* label, float* v, float v_min, float v_max, const char* format, ImGuiSliderFlags flags) {
+	return SliderScalar_2(label, ImGuiDataType_Float, v, &v_min, &v_max, format, flags);
+}
 bool ImGui::SliderFloat_2(const char* label, float* v, float v_min, float v_max, const char* format, ImGuiSliderFlags flags) {
 	return SliderScalar(label, ImGuiDataType_Float, v, &v_min, &v_max, format, flags);
 }
 bool ImGui::SliderInt_2(const char* label, int* v, int v_min, int v_max, const char* format, ImGuiSliderFlags flags) {
 	return SliderScalar(label, ImGuiDataType_S32, v, &v_min, &v_max, format, flags);
 }
-
+bool ImGui::SliderInt_3(const char* label, int* v, int v_min, int v_max, const char* format, ImGuiSliderFlags flags) {
+	return SliderScalar_2(label, ImGuiDataType_S32, v, &v_min, &v_max, format, flags);
+}
 
 bool ImGuiTextFilter2::Draw2(const char* label, float width) {
 	if (width != 0.0f)
