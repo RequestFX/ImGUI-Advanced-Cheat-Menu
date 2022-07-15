@@ -121,7 +121,6 @@ bool Config::load(std::string filePath) {
 				else if (set->isVec4()) {
 					set->setVec4(ImVec4(std::atof(lineArr[idx].c_str()), std::atof(lineArr[idx + 1].c_str()), std::atof(lineArr[idx + 2].c_str()), std::atof(lineArr[idx + 3].c_str())));
 				}
-
 			}
 			catch (...) {}
 		}

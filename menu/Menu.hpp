@@ -19,10 +19,10 @@ namespace Menu {
 
 		* frameCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(44, 43, 44, 255), obf("frameCol"))).getVec4(),
 		* hoverCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(37, 36, 37, 255), obf("hoverCol"))).getVec4(),
-		* itemCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(240, 74, 88, 255), obf("hoverCol"))).getVec4(),
-		* itemActiveCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(240, 50, 66, 255), obf("hoverCol"))).getVec4(),
-		* resizeGripCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(220, 50, 66, 120), obf("hoverCol"))).getVec4(),
-		* resizeGripHoverCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(250, 50, 66, 140), obf("hoverCol"))).getVec4();
+		* itemCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(240, 74, 88, 255), obf("itemCol"))).getVec4(),
+		* itemActiveCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(240, 50, 66, 255), obf("itemActiveCol"))).getVec4(),
+		* resizeGripCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(220, 50, 66, 120), obf("resizeGripCol"))).getVec4(),
+		* resizeGripHoverCol = &SetManager::i().add(new Set(ImGuiHelper::rgbaToVec4(250, 50, 66, 140), obf("resizeGripHoverCol"))).getVec4();
 
 	inline bool isGUIVisible = true;
 
