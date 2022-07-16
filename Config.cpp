@@ -18,6 +18,8 @@ bool Config::save() {
 bool Config::save(std::string filePath) {
 	std::ofstream save(filePath);
 	if (!save.is_open()) return false;
+	std::string cfgName = obf("CFG:") + StringH::getFileNameFromPath(filePath);
+	save << StringH::strToBytes(Obf::xor_(cfgName)) << "\n"; // save Config Name
 
 	for (Module* mod : ModuleManager::i().modules) {
 		std::string str = obf("MOD:") + mod->getName() + ":" + std::to_string(mod->isToggled()) + ":" + std::to_string(mod->getKey());

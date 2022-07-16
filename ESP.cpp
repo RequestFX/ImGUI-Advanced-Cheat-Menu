@@ -54,7 +54,7 @@ void ESP::renderImGui() {
 	}
 	if (ImGui::BeginCombo(obf("Healthbar Style").c_str(), obf("Style").c_str(), 0)) {
 		ImGui::Checkbox_(obf("Healthbar").c_str(), isHealthBar);
-		ImGui::ColorEdit4(obf("Healthbar Color##1").c_str(), (float*)&colHealthBar, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
+		ImGui::ColorEdit4(obf("Healthbar Color##1").c_str(), (float*)colHealthBar, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar);
 		ImGui::Checkbox_(obf("Healthbar Based on Health").c_str(), isHealthBarHealthBased);
 		ImGui::EndCombo();
 	}
