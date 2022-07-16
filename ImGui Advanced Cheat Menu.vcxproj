@@ -191,8 +191,8 @@
     <ClInclude Include="menu\Fonts.hpp" />
     <ClInclude Include="menu\imgui_custom.hpp" />
     <ClInclude Include="menu\imgui_helper.hpp" />
+    <ClInclude Include="menu\imgui_notify.h" />
     <ClInclude Include="menu\Menu.hpp" />
-    <ClInclude Include="menu\Settings.hpp" />
     <ClInclude Include="Module.hpp" />
     <ClInclude Include="ModuleManager.hpp" />
     <ClInclude Include="RCS.hpp" />

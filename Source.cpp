@@ -10,11 +10,28 @@
 
 #include "menu/Fonts.hpp"
 #include "menu/Menu.hpp"
-
 #include "menu/Console.hpp"
+#include "ModuleManager.hpp"
+
 #include <Windows.h>
+#include "menu/imgui_notify.h"
 
 bool show_demo_window = true;
+
+void keyCheck() {
+	if (GetAsyncKeyState(VK_INSERT) & 1) {
+		Menu::isGUIVisible = !Menu::isGUIVisible;
+	}
+
+	for (Module* mod : ModuleManager::i().modules) {
+		if (GetAsyncKeyState(mod->getKey()) & 1) {
+			mod->toggle();
+			ImGuiToast toast(ImGuiToastType_Info, 400);
+			toast.set_title((obf("Toggled ") + mod->getName()).c_str());
+			ImGui::InsertNotification(toast);
+		}
+	}
+}
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	sf::RenderWindow window(sf::VideoMode(1280, 800), obf("ImGui + SFML = <3"), sf::Style::Default);
@@ -47,11 +64,22 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		ImGui::SFML::Update(window, deltaClock.restart());
 
+		keyCheck();
+
 		// imgui render here
 		if (show_demo_window) ImGui::ShowDemoWindow(&show_demo_window);
 
 		Menu::render();
-		Console::i().render();
+		if (Menu::isGUIVisible)
+			Console::i().render();
+
+		{ // render Notifications
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 5.f);
+			ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(43.f / 255.f, 43.f / 255.f, 43.f / 255.f, 100.f / 255.f));
+			ImGui::RenderNotifications();
+			ImGui::PopStyleVar(1); // Don't forget to Pop()
+			ImGui::PopStyleColor(1);
+		}
 
 		window.clear(sf::Color(115, 140, 155, 255));
 		// sfml render here

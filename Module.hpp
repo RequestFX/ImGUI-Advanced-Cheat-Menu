@@ -36,7 +36,7 @@ public:
 		return key;
 	}
 
-	void setKey(int key, bool log = true) {
+	void setKey(int key, bool log = false) {
 		this->key = key;
 		if (!log) return;
 		std::string out = obf("Set Key: [").c_str() + StringH::vkToString(key) + obf("] for Module: [").c_str() + this->name.c_str() + "]";
@@ -47,20 +47,22 @@ public:
 		return toggled;
 	}
 
-	void setToggled(bool toggled) {
+	void setToggled(bool toggled, bool log = false) {
 		this->toggled = toggled;
+		if (!log) return;
 		Console::i().logInfo(obf("Set Toggled: [") + StringH::boolToStr(toggled) + obf("] for Module: [") + this->name + obf("]"));
 	}
 
-	void toggle() {
+	void toggle(bool log = false) {
 		toggled = !toggled;
-		Console::i().logInfo(obf("Toggled to: [") + StringH::boolToStr(toggled) + obf("] for Module: [") + this->name + obf("]"));
-
 		if (isToggled()) {
 			onEnable();
 		}
 		else {
 			onDisable();
 		}
+		if (!log) return;
+
+		Console::i().logInfo(obf("Toggled to: [") + StringH::boolToStr(toggled) + obf("] for Module: [") + this->name + obf("]"));
 	}
 };

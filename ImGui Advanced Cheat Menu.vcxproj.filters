@@ -167,9 +167,6 @@
     <ClInclude Include="Dependencies\imgui-sfml\include\imstb_truetype.h">
       <Filter>Header Files\dependencies\imgui-sfml\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="menu\Settings.hpp">
-      <Filter>Header Files\gui</Filter>
-    </ClInclude>
     <ClInclude Include="menu\imgui_custom.hpp">
       <Filter>Header Files\gui\imgui</Filter>
     </ClInclude>
@@ -238,6 +235,9 @@
     </ClInclude>
     <ClInclude Include="util\Vec2H.hpp">
       <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\imgui_notify.h">
+      <Filter>Header Files\gui\imgui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

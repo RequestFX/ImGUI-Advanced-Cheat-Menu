@@ -10,12 +10,10 @@
 #include "../util/ColorH.hpp"
 #include "../util/Obf.hpp"
 #include "Fonts.hpp"
-#include "Settings.hpp"
 
 #include <vector>
 #include <imgui-SFML.h>
 #include <Windows.h>
-#include <iostream>
 
 void Menu::setColors() {
 	style->Colors[ImGuiCol_WindowBg] = *winCol;
@@ -306,11 +304,6 @@ void Menu::renderSubTab2() {
 
 void Menu::render() {
 	HUD::i().render();
-
-	if (GetAsyncKeyState(VK_INSERT) & 1) {
-		isGUIVisible = !isGUIVisible;
-	}
-
 	if (!isGUIVisible) return;
 
 	ImGui::SetNextWindowSize({ 800, 600 });
