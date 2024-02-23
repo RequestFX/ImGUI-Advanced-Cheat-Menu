@@ -21,7 +21,29 @@ public:
 		this->toggled = false;
 	}
 
-	virtual void onEnable() = 0;
+	virtual void onEnable() = 0;[{
+	"resource": "/C:/Users/kylem/OneDrive/Documents/GitHub/ImGUI-Advanced-Cheat-Menu/Source.cpp",
+	"owner": "C/C++: IntelliSense",
+	"code": "1696",
+	"severity": 8,
+	"message": "#include errors detected. Please update your includePath. Squiggles are disabled for this translation unit (C:\\Users\\kylem\\OneDrive\\Documents\\GitHub\\ImGUI-Advanced-Cheat-Menu\\Source.cpp).",
+	"source": "C/C++",
+	"startLineNumber": 1,
+	"startColumn": 1,
+	"endLineNumber": 1,
+	"endColumn": 19
+},{
+	"resource": "/C:/Users/kylem/OneDrive/Documents/GitHub/ImGUI-Advanced-Cheat-Menu/Source.cpp",
+	"owner": "C/C++: IntelliSense",
+	"code": "1696",
+	"severity": 8,
+	"message": "cannot open source file \"float.h\" (dependency of \"imgui.h\"). Please run the 'Select IntelliSense Configuration...' command to locate your system headers.",
+	"source": "C/C++",
+	"startLineNumber": 1,
+	"startColumn": 1,
+	"endLineNumber": 1,
+	"endColumn": 19
+}]
 	virtual void onDisable() = 0;
 
 	std::string& getName() {
